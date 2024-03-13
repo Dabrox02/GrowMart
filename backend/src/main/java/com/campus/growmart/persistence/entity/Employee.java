@@ -29,6 +29,9 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "puesto")
+    private String position;
+
     @ManyToOne
     @JoinColumn(name = "codigo_oficina", referencedColumnName = "codigo_oficina")
     private Office office;
@@ -36,13 +39,6 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "codigo_jefe", referencedColumnName = "codigo_empleado")
     private Employee boss;
-
-
-
-
-    @Column(name = "puesto")
-    private String position;
-
 
     @OneToMany(mappedBy = "boss", cascade = CascadeType.ALL)
     private List<Employee> subordinateList;

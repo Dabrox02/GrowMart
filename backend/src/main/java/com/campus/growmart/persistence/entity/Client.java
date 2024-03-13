@@ -1,8 +1,6 @@
 package com.campus.growmart.persistence.entity;
 
-
 import jakarta.persistence.*;
-
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -49,18 +47,17 @@ public class Client {
     @Column(name = "codigo_postal", length = 10)
     private String postalCode;
 
-    @ManyToOne
-    @JoinColumn(name = "codigo_empleado_rep_ventas" , referencedColumnName = "codigo_empleado")
-    private Employee salesRepresentativeEmployeeCode;
-
     @Column(name = "limite_credito", precision = 15, scale = 2)
     private BigDecimal creditLimit;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_empleado_rep_ventas", referencedColumnName = "codigo_empleado")
+    private Employee salesRepresentativeEmployeeCode;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Order> orderList;
 
-
-    @OneToMany(mappedBy = "id.client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Payment> paymentList;
 
 }

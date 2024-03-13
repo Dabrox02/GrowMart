@@ -1,18 +1,14 @@
 package com.campus.growmart.persistence.entity;
 
-
 import jakarta.persistence.*;
-
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-
 @Entity
 @Table(name = "producto")
 public class Product implements Serializable {
-
 
     @Id
     @Column(name = "codigo_producto", length = 15, nullable = false)
@@ -21,11 +17,9 @@ public class Product implements Serializable {
     @Column(name = "nombre", length = 70, nullable = false)
     private String name;
 
-
     @ManyToOne
-    @JoinColumn(name = "gama", referencedColumnName = "gama" ,  nullable = false)
-    private ProductRange range;
-
+    @JoinColumn(name = "gama", referencedColumnName = "gama", nullable = false)
+    private ProductRange productRange;
 
     @Column(name = "dimensiones", length = 25)
     private String dimensions;
@@ -45,9 +39,7 @@ public class Product implements Serializable {
     @Column(name = "precio_proveedor", precision = 15, scale = 2)
     private BigDecimal supplierPrice;
 
-    @OneToMany(mappedBy = "id.product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetailList;
-
-
 
 }

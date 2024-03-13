@@ -1,6 +1,5 @@
 package com.campus.growmart.persistence.entity;
 
-
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -10,11 +9,9 @@ import java.util.Date;
 @Table(name = "pago")
 public class Payment {
 
-
-    @EmbeddedId
-    private PaymentId id;
-
-
+    @Id
+    @Column(name = "id_transaccion", length = 50)
+    private String transactionId;
 
     @Column(name = "forma_pago", length = 40, nullable = false)
     private String paymentMethod;
@@ -24,5 +21,9 @@ public class Payment {
 
     @Column(name = "total", precision = 15, scale = 2, nullable = false)
     private BigDecimal total;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente")
+    private Client client;
 
 }

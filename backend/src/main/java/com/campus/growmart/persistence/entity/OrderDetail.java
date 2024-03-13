@@ -1,23 +1,25 @@
 package com.campus.growmart.persistence.entity;
 
-
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "detalle_pedido")
 
-public class OrderDetail  {
+public class OrderDetail {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @EmbeddedId
-    private OrderDetailId id;
+    @ManyToOne
+    @JoinColumn(name = "codigo_pedido", referencedColumnName = "codigo_pedido")
+    private Order order;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "codigo_producto", referencedColumnName = "codigo_producto")
+    private Product product;
 
     @Column(name = "cantidad", nullable = false)
     private Integer amount;
@@ -27,6 +29,5 @@ public class OrderDetail  {
 
     @Column(name = "numero_linea", nullable = false)
     private Short lineNumber;
-
 
 }

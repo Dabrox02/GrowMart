@@ -23,7 +23,7 @@ public class ProductRange {
     @Column(name = "imagen", length = 256)
     private String image;
 
-    @OneToMany(mappedBy = "range", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productRange", cascade = CascadeType.ALL)
     private List<Product> productList;
 
 }

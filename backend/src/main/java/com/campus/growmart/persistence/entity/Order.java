@@ -1,6 +1,5 @@
 package com.campus.growmart.persistence.entity;
 
-
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,6 +10,7 @@ import java.util.List;
 @Table(name = "pedido")
 public class Order implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_pedido")
     private Integer orderCode;
 
@@ -30,11 +30,10 @@ public class Order implements Serializable {
     private String comments;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_cliente", nullable = false  , referencedColumnName = "codigo_cliente")
+    @JoinColumn(name = "codigo_cliente", nullable = false, referencedColumnName = "codigo_cliente")
     private Client client;
 
-    @OneToMany(mappedBy = "id.order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetailList;
-
 
 }
