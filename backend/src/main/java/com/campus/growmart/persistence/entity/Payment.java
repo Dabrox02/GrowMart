@@ -16,6 +16,7 @@ public class Payment {
     @Column(name = "forma_pago", length = 40, nullable = false)
     private String paymentMethod;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_pago", nullable = false)
     private Date paymentDate;
 

@@ -14,12 +14,15 @@ public class Order implements Serializable {
     @Column(name = "codigo_pedido")
     private Integer orderCode;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_pedido", nullable = false)
     private Date orderDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_esperada", nullable = false)
     private Date expectedDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_entrega")
     private Date deliveryDate;
 

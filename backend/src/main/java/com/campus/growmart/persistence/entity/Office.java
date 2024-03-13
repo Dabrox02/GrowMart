@@ -12,19 +12,19 @@ public class Office {
     @Column(name = "codigo_oficina", length = 10)
     private String officeCode;
 
-    @Column(name = "ciudad")
+    @Column(name = "ciudad", length = 30, nullable = false)
     private String city;
 
-    @Column(name = "pais")
+    @Column(name = "pais", length = 50, nullable = false)
     private String country;
 
-    @Column(name = "region")
+    @Column(name = "region", length = 50)
     private String region;
 
-    @Column(name = "codigo_postal", length = 10)
+    @Column(name = "codigo_postal", length = 10, nullable = false)
     private String postalCode;
 
-    @Column(name = "telefono", length = 20)
+    @Column(name = "telefono", length = 20, nullable = false)
     private String phoneNumber;
 
     @Column(name = "linea_direccion1", length = 50, nullable = false)

@@ -11,7 +11,8 @@ public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_detalle_pedido")
+    private Long orderDetailId;
 
     @ManyToOne
     @JoinColumn(name = "codigo_pedido", referencedColumnName = "codigo_pedido")
