@@ -1,67 +1,30 @@
-package com.campus.growmart.persistence.entity;
-
-import jakarta.persistence.*;
+package com.campus.growmart.persistence.dto;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-@Entity
-@Table(name = "cliente")
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class Client {
-
-    @Id
-    @Column(name = "codigo_cliente")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ClientDTO {
     private Integer clientCode;
-
-    @Column(name = "nombre_cliente", length = 50, nullable = false)
     private String clientName;
-
-    @Column(name = "nombre_contacto", length = 30)
     private String contactName;
-
-    @Column(name = "apellido_contacto", length = 30)
     private String contactSurname;
-
-    @Column(name = "telefono", length = 15, nullable = false)
     private String phoneNumber;
-
-    @Column(name = "fax", length = 15, nullable = false)
     private String fax;
-
-    @Column(name = "linea_direccion1", length = 50, nullable = false)
     private String lineAdress1;
-
-    @Column(name = "linea_direccion2", length = 50)
     private String lineAdress2;
-
-    @Column(name = "ciudad", length = 50, nullable = false)
     private String city;
-
-    @Column(name = "region", length = 50)
     private String region;
-
-    @Column(name = "pais", length = 50)
     private String country;
-
-    @Column(name = "codigo_postal", length = 10)
     private String postalCode;
-
-    @Column(name = "limite_credito", precision = 15, scale = 2)
     private BigDecimal creditLimit;
 
-    @ManyToOne
-    @JoinColumn(name = "codigo_empleado_rep_ventas", referencedColumnName = "codigo_empleado")
-    private Employee salesRepresentativeEmployeeCode;
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Order> orderList;
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Payment> paymentList;
+    public ClientDTO() {
+    }
 
     public Integer getClientCode() {
-        return this.clientCode;
+        return clientCode;
     }
 
     public void setClientCode(Integer clientCode) {
@@ -69,7 +32,7 @@ public class Client {
     }
 
     public String getClientName() {
-        return this.clientName;
+        return clientName;
     }
 
     public void setClientName(String clientName) {
@@ -77,7 +40,7 @@ public class Client {
     }
 
     public String getContactName() {
-        return this.contactName;
+        return contactName;
     }
 
     public void setContactName(String contactName) {
@@ -85,7 +48,7 @@ public class Client {
     }
 
     public String getContactSurname() {
-        return this.contactSurname;
+        return contactSurname;
     }
 
     public void setContactSurname(String contactSurname) {
@@ -93,7 +56,7 @@ public class Client {
     }
 
     public String getPhoneNumber() {
-        return this.phoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -101,7 +64,7 @@ public class Client {
     }
 
     public String getFax() {
-        return this.fax;
+        return fax;
     }
 
     public void setFax(String fax) {
@@ -109,7 +72,7 @@ public class Client {
     }
 
     public String getLineAdress1() {
-        return this.lineAdress1;
+        return lineAdress1;
     }
 
     public void setLineAdress1(String lineAdress1) {
@@ -117,7 +80,7 @@ public class Client {
     }
 
     public String getLineAdress2() {
-        return this.lineAdress2;
+        return lineAdress2;
     }
 
     public void setLineAdress2(String lineAdress2) {
@@ -125,7 +88,7 @@ public class Client {
     }
 
     public String getCity() {
-        return this.city;
+        return city;
     }
 
     public void setCity(String city) {
@@ -133,7 +96,7 @@ public class Client {
     }
 
     public String getRegion() {
-        return this.region;
+        return region;
     }
 
     public void setRegion(String region) {
@@ -141,7 +104,7 @@ public class Client {
     }
 
     public String getCountry() {
-        return this.country;
+        return country;
     }
 
     public void setCountry(String country) {
@@ -149,7 +112,7 @@ public class Client {
     }
 
     public String getPostalCode() {
-        return this.postalCode;
+        return postalCode;
     }
 
     public void setPostalCode(String postalCode) {
@@ -157,35 +120,11 @@ public class Client {
     }
 
     public BigDecimal getCreditLimit() {
-        return this.creditLimit;
+        return creditLimit;
     }
 
     public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
-    }
-
-    public Employee getSalesRepresentativeEmployeeCode() {
-        return this.salesRepresentativeEmployeeCode;
-    }
-
-    public void setSalesRepresentativeEmployeeCode(Employee salesRepresentativeEmployeeCode) {
-        this.salesRepresentativeEmployeeCode = salesRepresentativeEmployeeCode;
-    }
-
-    public List<Order> getOrderList() {
-        return this.orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
-
-    public List<Payment> getPaymentList() {
-        return this.paymentList;
-    }
-
-    public void setPaymentList(List<Payment> paymentList) {
-        this.paymentList = paymentList;
     }
 
     @Override
@@ -204,9 +143,6 @@ public class Client {
                 ", country='" + getCountry() + "'" +
                 ", postalCode='" + getPostalCode() + "'" +
                 ", creditLimit='" + getCreditLimit() + "'" +
-                ", salesRepresentativeEmployeeCode='" + getSalesRepresentativeEmployeeCode() + "'" +
-                ", orderList='" + getOrderList() + "'" +
-                ", paymentList='" + getPaymentList() + "'" +
                 "}";
     }
 

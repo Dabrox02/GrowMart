@@ -9,5 +9,4 @@ public class GrowmartApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GrowmartApplication.class, args);
 	}
-
 }
