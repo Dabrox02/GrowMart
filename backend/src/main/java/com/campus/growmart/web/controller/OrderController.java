@@ -36,4 +36,13 @@ public class OrderController {
         return ResponseEntity.ok().body(results);
     }
 
+
+    @GetMapping("/beforeExpected")
+    public  ResponseEntity<?>   findOrdersBeforeExpected(){
+        List<OrderDTO> results = orderService.findOrdersBeforeExpected();
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+    }
 }

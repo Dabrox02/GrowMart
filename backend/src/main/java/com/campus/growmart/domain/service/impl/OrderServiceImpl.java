@@ -46,4 +46,23 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    @Override
+    public List<OrderDTO> findOrdersBeforeExpected() {
+        List<Object[]> results = orderRepository.findOrdersBeforeExpected();
+
+        return results.stream().map(obj -> {
+            OrderDTO orderDTO = new OrderDTO();
+            ClientDTO clientDTO = new ClientDTO();
+            clientDTO.setClientCode((Integer) obj[1]);
+            orderDTO.setOrderCode((Integer) obj[0]);
+            orderDTO.setClient(clientDTO);
+            orderDTO.setExpectedDate((Date) obj[2]);
+            orderDTO.setDeliveryDate((Date) obj[3]);
+            return orderDTO;
+        }).collect(Collectors.toList());
+        
+    }
+
+    
+
 }

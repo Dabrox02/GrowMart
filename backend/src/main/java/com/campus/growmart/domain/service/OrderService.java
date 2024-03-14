@@ -8,5 +8,6 @@ public interface OrderService {
     
     List<OrderDTO> findStatesOrder();
     List<OrderDTO> findOrdersNotOnTime();
+    List<OrderDTO> findOrdersBeforeExpected();
 
 }
