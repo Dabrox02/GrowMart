@@ -13,4 +13,9 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT DISTINCT o.state FROM Order o GROUP BY o.state")
     List<Object> findStatesOrder();
 
+    // Devuelve un listado con el codigo de pedido, codigo de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo.
+
+    @Query("SELECT  o.orderCode, o.client.clientCode  , o.expectedDate, o.deliveryDate FROM Order o WHERE o.deliveryDate > o.expectedDate")
+    List<Object[]> findOrdersNotOnTime();
+
 }

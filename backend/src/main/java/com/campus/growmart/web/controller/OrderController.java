@@ -26,4 +26,14 @@ public class OrderController {
         return ResponseEntity.ok().body(states);
     }
 
+
+    @GetMapping("/notInTime")
+    public ResponseEntity<?> findOrdersNotOnTime(){
+        List<OrderDTO> results = orderService.findOrdersNotOnTime();
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+    }
+
 }
