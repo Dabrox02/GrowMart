@@ -139,4 +139,43 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
 
+    @Override
+    public List<EmployeeDTO> findNameEmployeeWithNameBoss() {
+        List<Object[]> results = employeeRepository.findNameEmployeeWithNameBoss();
+
+        return results.stream()
+                .map(row -> {
+                    EmployeeDTO employeeDTO = new EmployeeDTO();
+                    EmployeeDTO bossDTO = new EmployeeDTO();
+                    employeeDTO.setName((String) row[0]);
+                    employeeDTO.setSurname1((String) row[1]);
+                    bossDTO.setName((String) row[2]);
+                    bossDTO.setSurname1((String) row[3]);
+                    employeeDTO.setBoss(bossDTO);
+                    return employeeDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EmployeeDTO> findEmployeeWithBossWithBoss() {
+        List<Object[]> results = employeeRepository.findEmployeeWithBossWithBoss();
+        return results.stream()
+                .map(row -> {
+                    EmployeeDTO employeeDTO = new EmployeeDTO();
+                    EmployeeDTO bossDTO = new EmployeeDTO();
+                    EmployeeDTO bossDTO2 = new EmployeeDTO();
+                    employeeDTO.setName((String) row[0]);
+                    employeeDTO.setSurname1((String) row[1]);
+                    bossDTO.setName((String) row[2]);
+                    bossDTO.setSurname1((String) row[3]);
+                    bossDTO2.setName((String) row[4]);
+                    bossDTO2.setSurname1((String) row[5]);
+                    bossDTO.setBoss(bossDTO2);
+                    employeeDTO.setBoss(bossDTO);
+                    return employeeDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
 }

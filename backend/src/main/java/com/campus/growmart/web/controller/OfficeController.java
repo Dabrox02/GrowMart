@@ -28,7 +28,7 @@ public class OfficeController {
         return ResponseEntity.ok().body(offices);
     }
 
-    @GetMapping()
+    @GetMapping("/country")
     public ResponseEntity<?> findByCountryLike(@RequestParam String country) {
         List<OfficeDTO> offices = officeService.findByCountryLike(country);
         if (offices.isEmpty())
@@ -36,4 +36,11 @@ public class OfficeController {
         return ResponseEntity.ok().body(offices);
     }
 
+    @GetMapping("/clients/city")
+    public ResponseEntity<?> findOfficesWithClientsIn(@RequestParam String city) {
+        List<OfficeDTO> offices = officeService.findOfficesWithClientsIn(city);
+        if (offices.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(offices);
+    }
 }

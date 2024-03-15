@@ -27,4 +27,15 @@ public interface ClientService {
 
     List<ClientDTO> findClientsWithNoPayment();
     
+    List<ClientDTO> findClientsOfficeWithPayment();
+
+    List<ClientDTO> findClientsOfficeWithNoPayment();
+
+    List<ClientDTO> findClientWithSalesRepAndOffice();
+
+    List<ClientDTO> findClientOrderNotInTime();
+
+    List<ClientDTO> findClientProductRangePurchased();
+
+    List<ClientDTO> findClientAllWithNoPayment();
 }

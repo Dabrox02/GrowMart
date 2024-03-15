@@ -10,4 +10,7 @@ public interface OfficeService {
 
     List<OfficeDTO> findByCountryLike(String country);
 
+    List<OfficeDTO> findOfficesWithClientsIn(String city);
+    
+
 }

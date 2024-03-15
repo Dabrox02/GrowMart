@@ -18,4 +18,8 @@ public interface EmployeeService {
     List<Map<String, Object>> findEmployeeAmountClients();
 
     List<EmployeeDTO> findNameClientWithSalesRep();
+
+    List<EmployeeDTO> findNameEmployeeWithNameBoss();
+
+    List<EmployeeDTO> findEmployeeWithBossWithBoss();
 }

@@ -23,13 +23,22 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     // que no sean representantes de ventas.
     List<Object> findByPositionNotLike(String position);
 
-    // ¿Cuántos empleados hay en la compañía? 
+    // ¿Cuántos empleados hay en la compañía?
     long count();
 
-    // Devuelve el nombre de los representantes de ventas y el número de clientes al que atiende cada uno.
+    // Devuelve el nombre de los representantes de ventas y el número de clientes
+    // al que atiende cada uno.
     @Query("SELECT CONCAT(e.name, ' ', e.surname1) , COUNT(c.clientCode) FROM Employee e LEFT JOIN e.clientList c GROUP BY e.name, e.surname1")
     List<Object[]> findEmployeeAmountClients();
 
+    // Devuelve un listado con el nombre de los empleados junto con el nombre de sus
+    // jefes.
+    @Query(value = "SELECT DISTINCT emp.nombre, emp.apellido1, j1.nombre, j1.apellido1 FROM empleado emp LEFT JOIN empleado j1 ON emp.codigo_jefe = j1.codigo_empleado", nativeQuery = true)
+    List<Object[]> findNameEmployeeWithNameBoss();
 
-    
+    // Devuelve un listado que muestre el nombre de cada empleados, el nombre de su
+    // jefe y el nombre del jefe de sus jefe.
+    @Query(value = "SELECT DISTINCT emp.nombre, emp.apellido1, j1.nombre, j1.apellido1, j2.nombre, j2.apellido1 FROM empleado emp LEFT JOIN empleado j1 ON emp.codigo_jefe = j1.codigo_empleado LEFT JOIN empleado j2 ON j1.codigo_jefe = j2.codigo_empleado", nativeQuery = true)
+    List<Object[]> findEmployeeWithBossWithBoss();
+
 }

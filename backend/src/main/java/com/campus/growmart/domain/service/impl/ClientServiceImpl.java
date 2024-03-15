@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 import com.campus.growmart.persistence.dto.EmployeeDTO;
+import com.campus.growmart.persistence.dto.OfficeDTO;
+import com.campus.growmart.persistence.dto.ProductRangeDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -156,6 +160,128 @@ public class ClientServiceImpl implements ClientService {
 
         );
         return dataList;
+    }
+
+    @Override
+    public List<ClientDTO> findClientsOfficeWithPayment() {
+        List<Object[]> results = clientRepository.findClientsOfficeWithPayment();
+
+        return results.stream()
+                .map(obj -> {
+                    ClientDTO clientDTO = new ClientDTO();
+                    EmployeeDTO employeeDTO = new EmployeeDTO();
+                    OfficeDTO officeDTO = new OfficeDTO();
+                    clientDTO.setClientName((String) obj[0]);
+                    employeeDTO.setName((String) obj[1]);
+                    employeeDTO.setSurname1((String) obj[2]);
+                    officeDTO.setCity((String) obj[3]);
+                    employeeDTO.setOffice(officeDTO);
+                    clientDTO.setSalesRepresentativeEmployeeCode(employeeDTO);
+                    return clientDTO;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientDTO> findClientsOfficeWithNoPayment() {
+        List<Object[]> results = clientRepository.findClientsOfficeWithNoPayment();
+
+        return results.stream()
+                .map(obj -> {
+                    ClientDTO clientDTO = new ClientDTO();
+                    EmployeeDTO employeeDTO = new EmployeeDTO();
+                    OfficeDTO officeDTO = new OfficeDTO();
+                    clientDTO.setClientName((String) obj[0]);
+                    employeeDTO.setName((String) obj[1]);
+                    employeeDTO.setSurname1((String) obj[2]);
+                    officeDTO.setCity((String) obj[3]);
+                    employeeDTO.setOffice(officeDTO);
+                    clientDTO.setSalesRepresentativeEmployeeCode(employeeDTO);
+                    return clientDTO;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientDTO> findClientWithSalesRepAndOffice() {
+        List<Object[]> results = clientRepository.findClientWithSalesRepAndOffice();
+
+        return results.stream()
+                .map(obj -> {
+                    ClientDTO clientDTO = new ClientDTO();
+                    EmployeeDTO employeeDTO = new EmployeeDTO();
+                    OfficeDTO officeDTO = new OfficeDTO();
+                    clientDTO.setClientName((String) obj[0]);
+                    employeeDTO.setName((String) obj[1]);
+                    employeeDTO.setSurname1((String) obj[2]);
+                    officeDTO.setCity((String) obj[3]);
+                    employeeDTO.setOffice(officeDTO);
+                    clientDTO.setSalesRepresentativeEmployeeCode(employeeDTO);
+                    return clientDTO;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientDTO> findClientOrderNotInTime() {
+        List<Object[]> results = clientRepository.findClientOrderNotInTime();
+
+        return results.stream()
+                .map(obj -> {
+                    ClientDTO clientDTO = new ClientDTO();
+                    clientDTO.setClientName((String) obj[0]);
+                    return clientDTO;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientDTO> findClientProductRangePurchased() {
+        List<Object[]> results = clientRepository.findClientProductRangePurchased();
+        List<ClientDTO> clients = new ArrayList<>();
+
+        for (Object[] obj : results) {
+            Integer codeClient = (Integer) obj[0];
+            ProductRangeDTO productRangeDTO = new ProductRangeDTO();
+            productRangeDTO.setRange((String) obj[1]);
+
+            boolean productRangeFound = false;
+            for (ClientDTO client : clients) {
+                if (client.getClientCode().equals(codeClient)) {
+                    client.getProductRangeDTO().add(productRangeDTO);
+                    productRangeFound = true;
+                    break;
+                }
+            }
+            if (!productRangeFound) {
+                ClientDTO clientDTO = new ClientDTO();
+                clientDTO.setClientCode(codeClient);
+                clientDTO.setProductRangeDTO(new ArrayList<>());
+                clientDTO.getProductRangeDTO().add(productRangeDTO);
+                clients.add(clientDTO);
+            }
+        }
+        return clients;
+    }
+
+    @Override
+    public List<ClientDTO> findClientAllWithNoPayment() {
+        List<Object[]> results = clientRepository.findClientAllWithNoPayment();
+
+        return results.stream()
+                .map(obj -> {
+                    ClientDTO clientDTO = new ClientDTO();
+                    clientDTO.setClientCode((Integer) obj[0]);
+                    clientDTO.setClientName((String) obj[10]);
+                    clientDTO.setContactName((String) obj[6]);
+                    clientDTO.setContactSurname((String) obj[5]);
+                    clientDTO.setCity((String) obj[7]);
+                    clientDTO.setCountry((String) obj[11]);
+                    clientDTO.setFax((String) obj[3]);
+                    clientDTO.setLineAdress1((String) obj[8]);
+                    clientDTO.setLineAdress2((String) obj[9]);
+                    clientDTO.setPhoneNumber((String) obj[4]);
+                    clientDTO.setPostalCode((String) obj[2]);
+                    clientDTO.setCreditLimit((BigDecimal) obj[1]);
+                    clientDTO.setRegion((String) obj[12]);
+                    return clientDTO;
+                }).collect(Collectors.toList());
     }
 
 }

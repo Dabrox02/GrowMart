@@ -102,4 +102,52 @@ public class ClientController {
         return ResponseEntity.ok().body(clients);
     }
 
+    @GetMapping("/office/paid")
+    public ResponseEntity<?> findClientsOfficeWithPayment() {
+        List<ClientDTO> clients = clientService.findClientsOfficeWithPayment();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/office/nopaid")
+    public ResponseEntity<?> findClientsOfficeWithNoPayment() {
+        List<ClientDTO> clients = clientService.findClientsOfficeWithNoPayment();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/salesRep/office")
+    public ResponseEntity<?> findClientWithSalesRepAndOffice() {
+        List<ClientDTO> clients = clientService.findClientWithSalesRepAndOffice();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/order/notInTime")
+    public ResponseEntity<?> findClientOrderNotInTime() {
+        List<ClientDTO> clients = clientService.findClientOrderNotInTime();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/productRange/purchased")
+    public ResponseEntity<?> findClientProductRangePurchased() {
+        List<ClientDTO> clients = clientService.findClientProductRangePurchased();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/paid/all")
+    public ResponseEntity<?> findClientAllWithNoPayment() {
+        List<ClientDTO> clients = clientService.findClientAllWithNoPayment();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
 }

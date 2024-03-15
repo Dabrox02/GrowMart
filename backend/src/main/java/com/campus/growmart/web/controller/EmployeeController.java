@@ -76,4 +76,20 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employees);
     }
 
+    @GetMapping("/with/boss")
+    public ResponseEntity<?> findNameEmployeeWithNameBoss() {
+        List<EmployeeDTO> employees = employeeService.findNameEmployeeWithNameBoss();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
+    @GetMapping("/with/boss/boss")
+    public ResponseEntity<?> findEmployeeWithBossWithBoss() {
+        List<EmployeeDTO> employees = employeeService.findEmployeeWithBossWithBoss();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
 }

@@ -46,4 +46,16 @@ public class OfficeServiceImpl implements OfficeService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<OfficeDTO> findOfficesWithClientsIn(String city) {
+        List<Object[]> results = officeRepository.findOfficesWithClientsIn(city);
+        return results.stream()
+                .map(obj -> {
+                    OfficeDTO officeDTO = new OfficeDTO();
+                    officeDTO.setLineAdress1((String) obj[0]);
+                    return officeDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
 }
