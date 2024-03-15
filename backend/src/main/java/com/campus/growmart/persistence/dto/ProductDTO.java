@@ -1,9 +1,6 @@
 package com.campus.growmart.persistence.dto;
 
-import com.campus.growmart.persistence.entity.OrderDetail;
-import com.campus.growmart.persistence.entity.ProductRange;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;

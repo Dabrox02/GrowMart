@@ -2,7 +2,6 @@ package com.campus.growmart.web.controller;
 
 import java.util.List;
 
-import com.campus.growmart.persistence.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,45 +27,40 @@ public class OrderController {
         return ResponseEntity.ok().body(states);
     }
 
-
     @GetMapping("/notInTime")
-    public ResponseEntity<?> findOrdersNotOnTime(){
+    public ResponseEntity<?> findOrdersNotOnTime() {
         List<OrderDTO> results = orderService.findOrdersNotOnTime();
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
     }
 
-
     @GetMapping("/beforeExpected")
-    public  ResponseEntity<?>   findOrdersBeforeExpected(){
+    public ResponseEntity<?> findOrdersBeforeExpected() {
         List<OrderDTO> results = orderService.findOrdersBeforeExpected();
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
     }
 
     @GetMapping("/rejectedYear")
-    public ResponseEntity<?> findOrdersrejectedYear( @RequestParam String year){
+    public ResponseEntity<?> findOrdersrejectedYear(@RequestParam String year) {
         List<OrderDTO> results = orderService.findOrdersrejectedYear(year);
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
-
     }
 
     @GetMapping("/deliveredMonth")
-    public ResponseEntity<?> findOrdersdeliveredMonth(@RequestParam String month){
-
+    public ResponseEntity<?> findOrdersdeliveredMonth(@RequestParam String month) {
         List<OrderDTO> results = orderService.findOrdersdeliveredMonth(month);
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
-
     }
 
 }

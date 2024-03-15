@@ -21,17 +21,13 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate FROM Order o WHERE (o.deliveryDate - o.expectedDate) <= -2")
     List<Object[]> findOrdersBeforeExpected();
 
-
-    //nuevas
-
     // Devuelve un listado de todos los pedidos que fueron rechazados en 2009.
     @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate, o.state FROM Order o WHERE YEAR(o.deliveryDate) = ?1 AND o.state = 'Rechazado'")
-    List<Object[]> findOrdersrejectedYear(String year) ;
+    List<Object[]> findOrdersRejectedYear(String year) ;
 
     // Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año
-
     @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate, o.state  FROM Order o WHERE LOWER(o.state) = 'entregado' AND MONTH(o.deliveryDate) = ?1")
-    List<Object[]> findOrdersdeliveredMonth(String month) ;
+    List<Object[]> findOrdersDeliveredMonth(String month) ;
 
     }
 

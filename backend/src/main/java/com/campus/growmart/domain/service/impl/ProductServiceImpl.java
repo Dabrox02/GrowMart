@@ -3,7 +3,6 @@ package com.campus.growmart.domain.service.impl;
 import com.campus.growmart.domain.repository.ProductRepository;
 import com.campus.growmart.persistence.dto.ProductDTO;
 import com.campus.growmart.persistence.dto.ProductRangeDTO;
-import com.campus.growmart.persistence.entity.ProductRange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setName((String) obj[1]);
             ProductRangeDTO productRangeDTO = new ProductRangeDTO();
             productRangeDTO.setRange((String) obj[2]);
-            productDTO.setProductRange(productRangeDTO) ;
+            productDTO.setProductRange(productRangeDTO);
             productDTO.setStock((Short) obj[3]);
             productDTO.setSalePrice((BigDecimal) obj[4]);
             return productDTO;

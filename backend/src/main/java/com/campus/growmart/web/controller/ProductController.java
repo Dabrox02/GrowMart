@@ -1,7 +1,6 @@
 package com.campus.growmart.web.controller;
 
 import com.campus.growmart.domain.service.ProductService;
-import com.campus.growmart.persistence.dto.PaymentDTO;
 import com.campus.growmart.persistence.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +17,9 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/productsRangePrice")
-    public ResponseEntity<?> findProductRangeStock(@RequestParam String range , @RequestParam String stock){
+    public ResponseEntity<?> findProductRangeStock(@RequestParam String range, @RequestParam String stock) {
         List<ProductDTO> results = productService.findProductRangeStock(range, stock);
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);

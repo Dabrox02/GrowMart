@@ -6,7 +6,6 @@ import com.campus.growmart.persistence.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.campus.growmart.persistence.entity.Client;
-import org.springframework.data.jpa.repository.Query;
 
 public interface ClientRepository extends JpaRepository<Client, Integer> {
 

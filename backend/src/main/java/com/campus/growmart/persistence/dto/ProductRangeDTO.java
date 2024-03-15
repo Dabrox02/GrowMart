@@ -1,17 +1,11 @@
 package com.campus.growmart.persistence.dto;
 
-import com.campus.growmart.persistence.entity.Product;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductRangeDTO {
-
 
     private String range;
 

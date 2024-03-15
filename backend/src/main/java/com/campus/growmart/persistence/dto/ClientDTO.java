@@ -2,7 +2,6 @@ package com.campus.growmart.persistence.dto;
 
 import java.math.BigDecimal;
 
-import com.campus.growmart.persistence.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

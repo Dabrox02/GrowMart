@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.campus.growmart.persistence.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,13 +60,13 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setDeliveryDate((Date) obj[3]);
             return orderDTO;
         }).collect(Collectors.toList());
-        
+
     }
 
-    public List<OrderDTO> findOrdersrejectedYear(String year){
-        List<Object[]> results = orderRepository.findOrdersrejectedYear( year);
+    public List<OrderDTO> findOrdersrejectedYear(String year) {
+        List<Object[]> results = orderRepository.findOrdersRejectedYear(year);
 
-        return results.stream().map( obj -> {
+        return results.stream().map(obj -> {
             OrderDTO orderDTO = new OrderDTO();
             ClientDTO clientDTO = new ClientDTO();
             clientDTO.setClientCode((Integer) obj[1]);
@@ -77,14 +76,14 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setDeliveryDate((Date) obj[3]);
             orderDTO.setState((String) obj[4]);
             return orderDTO;
-        } ).collect(Collectors.toList());
+        }).collect(Collectors.toList());
     }
 
     @Override
     public List<OrderDTO> findOrdersdeliveredMonth(String month) {
-        List<Object[]> results = orderRepository.findOrdersdeliveredMonth( month);
+        List<Object[]> results = orderRepository.findOrdersDeliveredMonth(month);
 
-        return results.stream().map( obj -> {
+        return results.stream().map(obj -> {
             OrderDTO orderDTO = new OrderDTO();
             ClientDTO clientDTO = new ClientDTO();
             clientDTO.setClientCode((Integer) obj[1]);
@@ -94,8 +93,7 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setDeliveryDate((Date) obj[3]);
             orderDTO.setState((String) obj[4]);
             return orderDTO;
-        } ).collect(Collectors.toList());
+        }).collect(Collectors.toList());
     }
-
 
 }
