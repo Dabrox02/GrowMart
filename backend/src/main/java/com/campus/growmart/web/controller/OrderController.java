@@ -2,10 +2,12 @@ package com.campus.growmart.web.controller;
 
 import java.util.List;
 
+import com.campus.growmart.persistence.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campus.growmart.domain.service.OrderService;
@@ -45,4 +47,26 @@ public class OrderController {
         }
         return ResponseEntity.ok().body(results);
     }
+
+    @GetMapping("/rejectedYear")
+    public ResponseEntity<?> findOrdersrejectedYear( @RequestParam String year){
+        List<OrderDTO> results = orderService.findOrdersrejectedYear(year);
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+
+    }
+
+    @GetMapping("/deliveredMonth")
+    public ResponseEntity<?> findOrdersdeliveredMonth(@RequestParam String month){
+
+        List<OrderDTO> results = orderService.findOrdersdeliveredMonth(month);
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+
+    }
+
 }

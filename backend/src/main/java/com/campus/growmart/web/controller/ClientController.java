@@ -2,6 +2,7 @@ package com.campus.growmart.web.controller;
 
 import java.util.List;
 
+import com.campus.growmart.persistence.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,25 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @GetMapping()
+    @GetMapping("/clientCountry")
     public ResponseEntity<?> findByCountryLike(@RequestParam String country) {
         List<ClientDTO> clients = clientService.findByCountryLike(country);
         if (clients.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/clientCityEmployee")
+    public ResponseEntity<?> findDistinctByCityAndSalesRepresentativeEmployeeCode(@RequestParam String city, @RequestParam String employeeCode){
+
+        Employee employee = new Employee();
+        employee.setEmployeeCode(  Integer.parseInt(employeeCode) );
+
+        List<ClientDTO> results = clientService.findDistinctByCityAndSalesRepresentativeEmployeeCode(city,employee);
+
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
     }
 
 }

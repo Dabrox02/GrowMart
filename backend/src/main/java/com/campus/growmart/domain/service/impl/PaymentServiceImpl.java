@@ -1,5 +1,7 @@
 package com.campus.growmart.domain.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +31,39 @@ public class PaymentServiceImpl implements PaymentService {
                 return paymentDTO;
             }
         ).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<PaymentDTO> findPaymentsYearMethod(String method, String year) {
+        List<Object[]> results = paymentRepository.findPaymentsYearMethod(method,year );
+
+        return results.stream().map( obj -> {
+            PaymentDTO paymentDTO = new PaymentDTO();
+            ClientDTO clientDTO = new ClientDTO();
+            clientDTO.setClientCode((Integer) obj[0]);
+            paymentDTO.setClient(clientDTO);
+            paymentDTO.setPaymentMethod((String) obj[1]);
+            paymentDTO.setTransactionId((String) obj[2]);
+            paymentDTO.setPaymentDate((Date) obj[3]);
+            paymentDTO.setTotal((BigDecimal) obj[4]);
+            return paymentDTO;
+
+        } ).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<PaymentDTO> findDistinctByPaymentMethod() {
+
+        List<Object> results = paymentRepository.findDistinctByPaymentMethod();
+        return results.stream().map(obj -> {
+            PaymentDTO paymentDTO = new PaymentDTO();
+            paymentDTO.setPaymentMethod((String) obj);
+            return paymentDTO;
+
+
+        }).collect(Collectors.toList());
 
     }
 

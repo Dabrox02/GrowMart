@@ -20,4 +20,18 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     // Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada.
     @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate FROM Order o WHERE (o.deliveryDate - o.expectedDate) <= -2")
     List<Object[]> findOrdersBeforeExpected();
-}
+
+
+    //nuevas
+
+    // Devuelve un listado de todos los pedidos que fueron rechazados en 2009.
+    @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate, o.state FROM Order o WHERE YEAR(o.deliveryDate) = ?1 AND o.state = 'Rechazado'")
+    List<Object[]> findOrdersrejectedYear(String year) ;
+
+    // Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año
+
+    @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate, o.state  FROM Order o WHERE LOWER(o.state) = 'entregado' AND MONTH(o.deliveryDate) = ?1")
+    List<Object[]> findOrdersdeliveredMonth(String month) ;
+
+    }
+

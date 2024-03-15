@@ -2,6 +2,7 @@ package com.campus.growmart.persistence.dto;
 
 import java.math.BigDecimal;
 
+import com.campus.growmart.persistence.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,6 +20,8 @@ public class ClientDTO {
     private String country;
     private String postalCode;
     private BigDecimal creditLimit;
+
+    private EmployeeDTO salesRepresentativeEmployeeCode;
 
     public ClientDTO() {
     }
@@ -125,6 +128,14 @@ public class ClientDTO {
 
     public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
+    }
+
+    public EmployeeDTO getSalesRepresentativeEmployeeCode() {
+        return salesRepresentativeEmployeeCode;
+    }
+
+    public void setSalesRepresentativeEmployeeCode(EmployeeDTO salesRepresentativeEmployeeCode) {
+        this.salesRepresentativeEmployeeCode = salesRepresentativeEmployeeCode;
     }
 
     @Override

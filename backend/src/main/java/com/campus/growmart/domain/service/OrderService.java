@@ -9,5 +9,8 @@ public interface OrderService {
     List<OrderDTO> findStatesOrder();
     List<OrderDTO> findOrdersNotOnTime();
     List<OrderDTO> findOrdersBeforeExpected();
+    List<OrderDTO> findOrdersrejectedYear(String year);
+
+    List<OrderDTO> findOrdersdeliveredMonth(String month);
 
 }

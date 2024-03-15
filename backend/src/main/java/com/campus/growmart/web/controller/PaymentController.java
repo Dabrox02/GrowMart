@@ -28,5 +28,26 @@ public class PaymentController {
         return ResponseEntity.ok().body(results);
     }
 
+    @GetMapping("/paymentMethodYear")
+    public ResponseEntity<?> findPaymentsYearMethod(@RequestParam String method, @RequestParam String year){
 
+        List<PaymentDTO> results = paymentService.findPaymentsYearMethod(method, year);
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+
+    }
+
+
+    @GetMapping("/allPaymentMethods")
+    public ResponseEntity<?> findDistincPaymentMethod(){
+
+        List<PaymentDTO> results = paymentService.findDistinctByPaymentMethod();
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+
+    }
 }
