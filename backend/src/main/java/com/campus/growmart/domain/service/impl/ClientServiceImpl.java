@@ -284,4 +284,50 @@ public class ClientServiceImpl implements ClientService {
                 }).collect(Collectors.toList());
     }
 
+    @Override
+    public List<ClientDTO> findClientAllWithNoOrder() {
+        List<Object[]> results = clientRepository.findClientAllWithNoOrder();
+        return results.stream()
+                .map(obj -> {
+                    ClientDTO clientDTO = new ClientDTO();
+                    clientDTO.setClientCode((Integer) obj[0]);
+                    clientDTO.setClientName((String) obj[10]);
+                    clientDTO.setContactName((String) obj[6]);
+                    clientDTO.setContactSurname((String) obj[5]);
+                    clientDTO.setCity((String) obj[7]);
+                    clientDTO.setCountry((String) obj[11]);
+                    clientDTO.setFax((String) obj[3]);
+                    clientDTO.setLineAdress1((String) obj[8]);
+                    clientDTO.setLineAdress2((String) obj[9]);
+                    clientDTO.setPhoneNumber((String) obj[4]);
+                    clientDTO.setPostalCode((String) obj[2]);
+                    clientDTO.setCreditLimit((BigDecimal) obj[1]);
+                    clientDTO.setRegion((String) obj[12]);
+                    return clientDTO;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientDTO> findClientAllWithNoPaidNoOrder() {
+        List<Object[]> results = clientRepository.findClientAllWithNoPaidNoOrder();
+        return results.stream()
+                .map(obj -> {
+                    ClientDTO clientDTO = new ClientDTO();
+                    clientDTO.setClientCode((Integer) obj[0]);
+                    clientDTO.setClientName((String) obj[10]);
+                    clientDTO.setContactName((String) obj[6]);
+                    clientDTO.setContactSurname((String) obj[5]);
+                    clientDTO.setCity((String) obj[7]);
+                    clientDTO.setCountry((String) obj[11]);
+                    clientDTO.setFax((String) obj[3]);
+                    clientDTO.setLineAdress1((String) obj[8]);
+                    clientDTO.setLineAdress2((String) obj[9]);
+                    clientDTO.setPhoneNumber((String) obj[4]);
+                    clientDTO.setPostalCode((String) obj[2]);
+                    clientDTO.setCreditLimit((BigDecimal) obj[1]);
+                    clientDTO.setRegion((String) obj[12]);
+                    return clientDTO;
+                }).collect(Collectors.toList());
+    }
+
 }

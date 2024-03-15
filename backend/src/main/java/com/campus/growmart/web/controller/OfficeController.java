@@ -20,7 +20,7 @@ public class OfficeController {
     @Autowired
     private OfficeService officeService;
 
-    @GetMapping("/officecode/city")
+    @GetMapping("/officeCode/city")
     public ResponseEntity<?> findAllOfficeCodesAndCities() {
         List<OfficeDTO> offices = officeService.findAllOfficeCodesAndCities();
         if (offices.isEmpty())

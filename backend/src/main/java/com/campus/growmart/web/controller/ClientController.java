@@ -142,7 +142,7 @@ public class ClientController {
         return ResponseEntity.ok().body(clients);
     }
 
-    @GetMapping("/paid/all")
+    @GetMapping("/noPaid/all")
     public ResponseEntity<?> findClientAllWithNoPayment() {
         List<ClientDTO> clients = clientService.findClientAllWithNoPayment();
         if (clients.isEmpty())
@@ -150,4 +150,19 @@ public class ClientController {
         return ResponseEntity.ok().body(clients);
     }
 
+    @GetMapping("/noOrder/all")
+    public ResponseEntity<?> findClientAllWithNoOrder() {
+        List<ClientDTO> clients = clientService.findClientAllWithNoOrder();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/noPaid/noOrder/all")
+    public ResponseEntity<?> findClientAllWithNoPaidNoOrder() {
+        List<ClientDTO> clients = clientService.findClientAllWithNoPaidNoOrder();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
 }

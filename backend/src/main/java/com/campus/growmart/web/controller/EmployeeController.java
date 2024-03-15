@@ -43,7 +43,7 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employees);
     }
 
-    @GetMapping("/not/position")
+    @GetMapping("/noPosition")
     public ResponseEntity<?> findNameLastnamePositionNotLike(@RequestParam String position) {
         List<EmployeeDTO> employees = employeeService.findNameLastnamePositionNotLike(position);
         if (employees.isEmpty())
@@ -87,6 +87,22 @@ public class EmployeeController {
     @GetMapping("/with/boss/boss")
     public ResponseEntity<?> findEmployeeWithBossWithBoss() {
         List<EmployeeDTO> employees = employeeService.findEmployeeWithBossWithBoss();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
+    @GetMapping("/noOffice/all")
+    public ResponseEntity<?> findEmployeeAllNoOffice() {
+        List<EmployeeDTO> employees = employeeService.findEmployeeAllNoOffice();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
+    @GetMapping("/noClient/all")
+    public ResponseEntity<?> findEmployeeAllNoClient() {
+        List<EmployeeDTO> employees = employeeService.findEmployeeAllNoClient();
         if (employees.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(employees);

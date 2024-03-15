@@ -41,4 +41,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query(value = "SELECT DISTINCT emp.nombre, emp.apellido1, j1.nombre, j1.apellido1, j2.nombre, j2.apellido1 FROM empleado emp LEFT JOIN empleado j1 ON emp.codigo_jefe = j1.codigo_empleado LEFT JOIN empleado j2 ON j1.codigo_jefe = j2.codigo_empleado", nativeQuery = true)
     List<Object[]> findEmployeeWithBossWithBoss();
 
+    // Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
+    @Query(value = "SELECT e.codigo_empleado, e.nombre, e.apellido1, e.apellido2, e.puesto, e.email, e.extension FROM empleado e LEFT JOIN oficina ofi ON e.codigo_oficina = ofi.codigo_oficina WHERE e.codigo_oficina IS NULL", nativeQuery = true)
+    List<Object[]> findEmployeeAllNoOffice();
+
+    // Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
+    @Query(value = "SELECT e.codigo_empleado, e.nombre, e.apellido1, e.apellido2, e.puesto, e.email, e.extension FROM empleado e LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas WHERE c.codigo_empleado_rep_ventas IS NULL", nativeQuery = true)
+    List<Object[]> findEmployeeAllNoClient();
+
 }

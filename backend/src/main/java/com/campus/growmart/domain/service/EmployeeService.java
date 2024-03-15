@@ -22,4 +22,8 @@ public interface EmployeeService {
     List<EmployeeDTO> findNameEmployeeWithNameBoss();
 
     List<EmployeeDTO> findEmployeeWithBossWithBoss();
+
+    List<EmployeeDTO> findEmployeeAllNoOffice();
+
+    List<EmployeeDTO> findEmployeeAllNoClient();
 }

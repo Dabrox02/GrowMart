@@ -83,4 +83,14 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     @Query(value = "SELECT codigo_cliente, limite_credito,codigo_postal,fax,telefono,apellido_contacto,nombre_contacto,ciudad,linea_direccion1,linea_direccion2,nombre_cliente,pais,region FROM cliente WHERE codigo_cliente NOT IN (select codigo_cliente FROM pago)", nativeQuery = true)
     List<Object[]> findClientAllWithNoPayment();
 
+    // Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
+    @Query(value = "SELECT c.codigo_cliente, c.limite_credito,c.codigo_postal,c.fax,c.telefono,c.apellido_contacto,c.nombre_contacto,c.ciudad,c.linea_direccion1,c.linea_direccion2,c.nombre_cliente,c.pais,c.region FROM cliente c LEFT JOIN pedido p ON c.codigo_cliente = p.codigo_cliente WHERE p.codigo_cliente IS NUll", nativeQuery = true)
+    List<Object[]> findClientAllWithNoOrder();
+
+    // Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
+    @Query(value="SELECT c.codigo_cliente, c.limite_credito,c.codigo_postal,c.fax,c.telefono,c.apellido_contacto,c.nombre_contacto,c.ciudad,c.linea_direccion1,c.linea_direccion2,c.nombre_cliente,c.pais,c.region FROM cliente c LEFT JOIN pedido p ON c.codigo_cliente = p.codigo_cliente WHERE p.codigo_cliente IS NUll", nativeQuery = true)
+    List<Object[]> findClientAllWithNoPaidNoOrder();
+
+    
+
 }
