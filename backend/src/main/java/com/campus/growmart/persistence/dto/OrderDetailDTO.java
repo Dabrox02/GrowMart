@@ -1,33 +1,23 @@
 package com.campus.growmart.persistence.dto;
 
-import com.campus.growmart.persistence.entity.Order;
-import com.campus.growmart.persistence.entity.Product;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDetailDTO {
 
-
     private Long orderDetailId;
-
 
     private OrderDTO order;
 
-
     private ProductDTO product;
-
 
     private Integer amount;
 
-
     private BigDecimal priceByUnit;
 
-
     private Short lineNumber;
-
 
     public Long getOrderDetailId() {
         return orderDetailId;

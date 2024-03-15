@@ -108,4 +108,40 @@ public class EmployeeDTO {
     public void setClientList(List<ClientDTO> clientList) {
         this.clientList = clientList;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        EmployeeDTO employee = (EmployeeDTO) obj;
+
+        return this.employeeCode == employee.getEmployeeCode()
+                && this.name.equals(employee.getName())
+                && this.surname1.equals(employee.getSurname1())
+                && this.surname2.equals(employee.getSurname2())
+                && this.extension.equals(employee.getExtension())
+                && this.email.equals(employee.getExtension());
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " employeeCode='" + getEmployeeCode() + "'" +
+                ", name='" + getName() + "'" +
+                ", surname1='" + getSurname1() + "'" +
+                ", surname2='" + getSurname2() + "'" +
+                ", extension='" + getExtension() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", position='" + getPosition() + "'" +
+                ", office='" + getOffice() + "'" +
+                ", boss='" + getBoss() + "'" +
+                ", subordinateList='" + getSubordinateList() + "'" +
+                ", clientList='" + getClientList() + "'" +
+                "}";
+    }
+
 }

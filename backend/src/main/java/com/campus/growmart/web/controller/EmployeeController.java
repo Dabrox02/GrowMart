@@ -68,4 +68,12 @@ public class EmployeeController {
     }
 
 
+    @GetMapping("/clients")
+    public ResponseEntity<?> findNameClientWithSalesRep() {
+        List<EmployeeDTO> employees = employeeService.findNameClientWithSalesRep();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
 }

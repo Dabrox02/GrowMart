@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.campus.growmart.domain.repository.ClientRepository;
 import com.campus.growmart.domain.repository.EmployeeRepository;
 import com.campus.growmart.domain.service.EmployeeService;
+import com.campus.growmart.persistence.dto.ClientDTO;
 import com.campus.growmart.persistence.dto.EmployeeDTO;
 import com.campus.growmart.persistence.entity.Employee;
 
@@ -21,6 +23,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     @Override
     @Transactional
@@ -95,6 +100,43 @@ public class EmployeeServiceImpl implements EmployeeService {
         }  );
 
         return dataList;
+    }
+
+    @Override
+    @Transactional
+    public List<EmployeeDTO> findNameClientWithSalesRep() {
+        List<Object[]> results = clientRepository.findNameClientWithSalesRep();
+        List<EmployeeDTO> employees = new ArrayList<>();
+
+        for (Object[] obj : results) {
+            String name = (String) obj[2];
+            String surname1 = (String) obj[3];
+            String surname2 = (String) obj[4];
+            ClientDTO clientDTO = new ClientDTO();
+            clientDTO.setClientName((String) obj[0]);
+
+            boolean employeeFound = false;
+            for (EmployeeDTO employeeDTO : employees) {
+                if (employeeDTO.getName().equals(name) &&
+                        employeeDTO.getSurname1().equals(surname1) &&
+                        employeeDTO.getSurname2().equals(surname2)) {
+                    employeeDTO.getClientList().add(clientDTO);
+                    employeeFound = true;
+                    break;
+                }
+            }
+            if (!employeeFound) {
+                EmployeeDTO newEmployee = new EmployeeDTO();
+                newEmployee.setName(name);
+                newEmployee.setSurname1(surname1);
+                newEmployee.setSurname2(surname2);
+                newEmployee.setClientList(new ArrayList<>());
+                newEmployee.getClientList().add(clientDTO);
+                employees.add(newEmployee);
+            }
+        }
+
+        return employees;
     }
 
 }

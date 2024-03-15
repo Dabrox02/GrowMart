@@ -3,7 +3,6 @@ package com.campus.growmart.web.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.campus.growmart.persistence.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,4 +86,20 @@ public class ClientController {
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
     }
+    @GetMapping("/paid")
+    public ResponseEntity<?> findClientsWithPayment() {
+        List<ClientDTO> clients = clientService.findClientsWithPayment();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
+    @GetMapping("/noPaid")
+    public ResponseEntity<?> findClientsWithNoPayment() {
+        List<ClientDTO> clients = clientService.findClientsWithNoPayment();
+        if (clients.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(clients);
+    }
+
 }
