@@ -71,4 +71,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public long count() {
+        return employeeRepository.count();
+    }
+
 }

@@ -12,4 +12,6 @@ public interface EmployeeService {
 
     List<EmployeeDTO> findNameLastnamePositionNotLike(String position);
 
+    long count();
+
 }

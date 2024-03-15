@@ -23,4 +23,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     // que no sean representantes de ventas.
     List<Object> findByPositionNotLike(String position);
 
+    // ¿Cuántos empleados hay en la compañía? 
+    long count();
+
+    
 }

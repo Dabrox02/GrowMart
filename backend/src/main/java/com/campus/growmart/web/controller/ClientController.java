@@ -1,6 +1,7 @@
 package com.campus.growmart.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.campus.growmart.persistence.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,14 @@ public class ClientController {
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
     }
+
+    @GetMapping("/countByCountry")
+    public ResponseEntity<?>  countByCountry( ) {
+        Map<String, Long> results = clientService.countByCountry() ;
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
+    }
+    
 
 }

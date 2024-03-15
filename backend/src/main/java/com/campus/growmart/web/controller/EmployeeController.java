@@ -50,4 +50,12 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employees);
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<?>  count() {
+        long results = employeeService.count();
+        return ResponseEntity.ok().body(results);
+        
+    }
+    
+
 }

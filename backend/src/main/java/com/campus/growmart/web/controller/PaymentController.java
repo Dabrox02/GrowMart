@@ -1,6 +1,7 @@
 package com.campus.growmart.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,4 +51,15 @@ public class PaymentController {
         return ResponseEntity.ok().body(results);
 
     }
+
+    @GetMapping("/averagePaymentYear")
+    public ResponseEntity<?>  findAveragePayment(@RequestParam String year ) {
+
+        Map<String, Object>  results = paymentService.findAveragePayment(year);
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+    }
+    
 }

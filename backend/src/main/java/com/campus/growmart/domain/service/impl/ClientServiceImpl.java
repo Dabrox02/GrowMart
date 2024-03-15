@@ -1,6 +1,8 @@
 package com.campus.growmart.domain.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.campus.growmart.persistence.dto.EmployeeDTO;
@@ -53,5 +55,19 @@ public class ClientServiceImpl implements ClientService {
             return clientDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public Map<String, Long> countByCountry() {
+        List<Object[]> results = clientRepository.countByCountry();
+
+        Map<String, Long> clientsByCountry = new HashMap<>();
+        results.stream().forEach( obj -> {
+            clientsByCountry.put( (String) obj[0], (Long) obj[1]);
+        } );
+        
+        return clientsByCountry;
+    }
+
+    
 
 }

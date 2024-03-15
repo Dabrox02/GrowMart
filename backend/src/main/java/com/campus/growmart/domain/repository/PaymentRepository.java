@@ -22,6 +22,8 @@ public interface PaymentRepository extends JpaRepository<Payment, Object> {
     @Query("SELECT DISTINCT p.paymentMethod FROM Payment p")
     List<Object> findDistinctByPaymentMethod();
 
-
+    // ¿Cuál fue el pago medio en 2009?
+    @Query("SELECT AVG(p.total), p.paymentDate FROM Payment p WHERE YEAR(p.paymentDate) = ?1 group by p.paymentDate")
+    List<Object[]> findAveragePayment( String year ); 
 
 }
