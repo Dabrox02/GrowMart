@@ -14,6 +14,7 @@ import com.campus.growmart.domain.repository.EmployeeRepository;
 import com.campus.growmart.domain.service.EmployeeService;
 import com.campus.growmart.persistence.dto.ClientDTO;
 import com.campus.growmart.persistence.dto.EmployeeDTO;
+import com.campus.growmart.persistence.dto.OfficeDTO;
 import com.campus.growmart.persistence.entity.Employee;
 
 import jakarta.transaction.Transactional;
@@ -212,6 +213,42 @@ public class EmployeeServiceImpl implements EmployeeService {
                     return employeeDTO;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EmployeeDTO> findEmployeeOfficeNoClient() {
+        List<Object[]> results = employeeRepository.findEmployeeOfficeNoClient();
+        return results.stream().map(obj -> {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.setName((String) obj[0]);
+            employeeDTO.setSurname1((String) obj[1]);
+            employeeDTO.setSurname2((String) obj[2]);
+            employeeDTO.setExtension((String) obj[3]);
+            employeeDTO.setEmail((String) obj[4]);
+            employeeDTO.setPosition((String) obj[5]);
+            OfficeDTO officeDTO = new OfficeDTO();
+            officeDTO.setCity((String) obj[6]);
+            officeDTO.setCountry((String) obj[7]);
+            officeDTO.setPostalCode((String) obj[8]);
+            officeDTO.setPhoneNumber((String) obj[9]);
+            employeeDTO.setOffice(officeDTO);
+            return employeeDTO;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EmployeeDTO> findEmployeeAllNoOfficeNoClient() {
+        List<Object[]> results = employeeRepository.findEmployeeAllNoOfficeNoClient();
+        return results.stream().map(obj -> {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.setName((String) obj[0]);
+            employeeDTO.setSurname1((String) obj[1]);
+            employeeDTO.setSurname2((String) obj[2]);
+            employeeDTO.setExtension((String) obj[3]);
+            employeeDTO.setEmail((String) obj[4]);
+            employeeDTO.setPosition((String) obj[5]);
+            return employeeDTO;
+        }).collect(Collectors.toList());
     }
 
 }

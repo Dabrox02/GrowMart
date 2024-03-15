@@ -108,4 +108,20 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employees);
     }
 
+    @GetMapping("/noClient/office/all")
+    public ResponseEntity<?> findEmployeeOfficeNoClient() {
+        List<EmployeeDTO> employees = employeeService.findEmployeeOfficeNoClient();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
+    @GetMapping("/noClient/noOffice/all")
+    public ResponseEntity<?> findEmployeeAllNoOfficeNoClient() {
+        List<EmployeeDTO> employees = employeeService.findEmployeeAllNoOfficeNoClient();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
 }

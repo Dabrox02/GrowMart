@@ -42,4 +42,5 @@ public interface ClientService {
     List<ClientDTO> findClientAllWithNoOrder();
 
     List<ClientDTO> findClientAllWithNoPaidNoOrder();
+
 }
