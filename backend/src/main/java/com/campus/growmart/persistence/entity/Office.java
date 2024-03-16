@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+import com.campus.growmart.persistence.dto.OfficeDTO;
+
 @Entity
 @Table(name = "oficina")
 public class Office {
@@ -35,7 +37,6 @@ public class Office {
 
     @OneToMany(mappedBy = "office", cascade = CascadeType.ALL)
     private List<Employee> employeeList;
-
 
     public Office() {
     }
@@ -122,6 +123,19 @@ public class Office {
 
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
+    }
+
+    public OfficeDTO convertToDto() {
+        OfficeDTO dto = new OfficeDTO();
+        dto.setOfficeCode(this.officeCode);
+        dto.setCity(this.city);
+        dto.setCountry(this.country);
+        dto.setRegion(this.region);
+        dto.setPostalCode(this.postalCode);
+        dto.setPhoneNumber(this.phoneNumber);
+        dto.setLineAdress1(this.lineAdress1);
+        dto.setLineAdress2(this.lineAdress2);
+        return dto;
     }
 
     @Override

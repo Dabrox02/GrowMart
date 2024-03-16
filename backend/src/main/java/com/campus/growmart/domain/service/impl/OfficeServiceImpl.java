@@ -58,4 +58,17 @@ public class OfficeServiceImpl implements OfficeService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<OfficeDTO> findOfficesNoSalesRepsOf(String productRange) {
+        List<Object> results = officeRepository.findOfficesNoSalesRepsOf(productRange);
+
+        return results.stream()
+                .map(obj -> {
+                    Office office = (Office) obj;
+                    OfficeDTO officeDTO = office.convertToDto();
+                    return officeDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
 }

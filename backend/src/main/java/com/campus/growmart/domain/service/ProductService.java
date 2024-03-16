@@ -10,5 +10,9 @@ public interface ProductService {
     List<ProductDTO> findProductRangeStock(String range, String stock);
 
     Map<String, Object> findMostExpesiveAndChespest();
-    
+
+    List<ProductDTO> findProductNoOrder();
+
+    List<ProductDTO> findProductNoOrderAll();
+
 }

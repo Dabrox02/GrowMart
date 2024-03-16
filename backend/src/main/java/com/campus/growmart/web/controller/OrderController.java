@@ -20,7 +20,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/states")
+    @GetMapping("/allStates")
     public ResponseEntity<?> findStatesOrder() {
         List<OrderDTO> states = orderService.findStatesOrder();
         if (states.isEmpty())

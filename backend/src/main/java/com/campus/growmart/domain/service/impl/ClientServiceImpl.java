@@ -18,6 +18,7 @@ import com.campus.growmart.domain.repository.ClientRepository;
 import com.campus.growmart.domain.service.ClientService;
 import com.campus.growmart.persistence.dto.ClientDTO;
 import com.campus.growmart.persistence.entity.Client;
+import com.campus.growmart.persistence.entity.Employee;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -326,6 +327,33 @@ public class ClientServiceImpl implements ClientService {
                     clientDTO.setPostalCode((String) obj[2]);
                     clientDTO.setCreditLimit((BigDecimal) obj[1]);
                     clientDTO.setRegion((String) obj[12]);
+                    return clientDTO;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientDTO> findDistinctByCityAndSalesRepresentativeEmployeeCode(String city, Employee employee) {
+        List<Object> results = clientRepository.findDistinctByCityAndSalesRepresentativeEmployeeCode(city, employee);
+        return results.stream().map(obj -> {
+            Client client = (Client) obj;
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.setEmployeeCode(client.getSalesRepresentativeEmployeeCode().getEmployeeCode());
+            ClientDTO clientDTO = new ClientDTO();
+            clientDTO.setClientCode(client.getClientCode());
+            clientDTO.setClientName(client.getClientName());
+            clientDTO.setSalesRepresentativeEmployeeCode(employeeDTO);
+            clientDTO.setCity(client.getCity());
+            return clientDTO;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientDTO> findClientOrderNoPaid() {
+        List<Object> results = clientRepository.findClientOrderNoPaid();
+        return results.stream()
+                .map(obj -> {
+                    Client client = (Client) obj;
+                    ClientDTO clientDTO = client.convertToDto();
                     return clientDTO;
                 }).collect(Collectors.toList());
     }

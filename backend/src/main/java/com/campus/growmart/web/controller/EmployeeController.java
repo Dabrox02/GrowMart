@@ -124,4 +124,12 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employees);
     }
 
+    @GetMapping("/noClient/with/boss/all")
+    public ResponseEntity<?> findEmployeeAllNoClientWithBoss() {
+        List<EmployeeDTO> employees = employeeService.findEmployeeAllNoClientWithBoss();
+        if (employees.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(employees);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.campus.growmart.domain.repository;
 
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -65,5 +66,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     // asociada y los que no tienen un cliente asociado.
     @Query(value = "SELECT e.name, e.surname1, e.surname2, e.extension, e.email, e.position FROM Employee e  LEFT JOIN e.office ofi LEFT JOIN e.clientList c WHERE c IS NULL OR e.office IS NULL")
     List<Object[]> findEmployeeAllNoOfficeNoClient();
+
+    // Devuelve un listado con los datos de los empleados que no tienen clientes
+    // asociados y el nombre de su jefe asociado.
+    @Query(value = "SELECT e.employeeCode, e.name, e.surname1, e.surname2, e.email, e.extension, e.position, b.name  FROM Employee e LEFT JOIN e.boss b LEFT JOIN e.clientList c WHERE c IS NULL")
+    List<Object[]> findEmployeeAllNoClientWithBoss();
 
 }

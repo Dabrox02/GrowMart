@@ -17,39 +17,35 @@ import com.campus.growmart.persistence.dto.PaymentDTO;
 @RequestMapping("/payment")
 public class PaymentController {
 
-    @Autowired 
+    @Autowired
     private PaymentService paymentService;
 
     @GetMapping("/clientCodes")
-    public ResponseEntity<?> findClientCodesPaymentYear(@RequestParam String year){
+    public ResponseEntity<?> findClientCodesPaymentYear(@RequestParam String year) {
         List<PaymentDTO> results = paymentService.findClientCodesPaymentYear(year);
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
     }
 
     @GetMapping("/paymentMethodYear")
-    public ResponseEntity<?> findPaymentsYearMethod(@RequestParam String method, @RequestParam String year){
+    public ResponseEntity<?> findPaymentsYearMethod(@RequestParam String method, @RequestParam String year) {
 
         List<PaymentDTO> results = paymentService.findPaymentsYearMethod(method, year);
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
-
     }
 
-
     @GetMapping("/allPaymentMethods")
-    public ResponseEntity<?> findDistincPaymentMethod(){
-
+    public ResponseEntity<?> findDistincPaymentMethod() {
         List<PaymentDTO> results = paymentService.findDistinctByPaymentMethod();
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
-
     }
 
     @GetMapping("/averagePaymentYear")

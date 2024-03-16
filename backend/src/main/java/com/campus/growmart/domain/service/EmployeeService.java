@@ -30,4 +30,6 @@ public interface EmployeeService {
     List<EmployeeDTO> findEmployeeOfficeNoClient();
 
     List<EmployeeDTO> findEmployeeAllNoOfficeNoClient();
+
+    List<EmployeeDTO> findEmployeeAllNoClientWithBoss();
 }

@@ -12,5 +12,5 @@ public interface OfficeService {
 
     List<OfficeDTO> findOfficesWithClientsIn(String city);
     
-
+    List<OfficeDTO> findOfficesNoSalesRepsOf(String productRange);
 }

@@ -251,4 +251,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         }).collect(Collectors.toList());
     }
 
+    @Override
+    public List<EmployeeDTO> findEmployeeAllNoClientWithBoss() {
+        List<Object[]> results = employeeRepository.findEmployeeAllNoClientWithBoss();
+        return results.stream().map(obj -> {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            EmployeeDTO bossDTO = new EmployeeDTO();
+            employeeDTO.setEmployeeCode((Integer) obj[0]);
+            employeeDTO.setName((String) obj[1]);
+            employeeDTO.setSurname1((String) obj[2]);
+            employeeDTO.setSurname2((String) obj[3]);
+            employeeDTO.setEmail((String) obj[4]);
+            employeeDTO.setExtension((String) obj[5]);
+            employeeDTO.setPosition((String) obj[6]);
+            bossDTO.setName((String) obj[7]);
+            employeeDTO.setBoss(bossDTO);
+            return employeeDTO;
+        }).collect(Collectors.toList());
+    }
+
 }

@@ -20,4 +20,10 @@ public interface OfficeRepository extends JpaRepository<Office, String> {
     @Query(value = "SELECT DISTINCT ofi.linea_direccion1 FROM cliente c JOIN empleado e ON c.codigo_empleado_rep_ventas = e.codigo_empleado JOIN oficina ofi ON e.codigo_oficina = ofi.codigo_oficina WHERE LOWER(c.ciudad) = LOWER(?1)", nativeQuery = true)
     List<Object[]> findOfficesWithClientsIn(String city);
 
+    // Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan
+    // sido los representantes de ventas de algún cliente que haya realizado la
+    // compra de algún producto de la gama Frutales.
+    @Query(value = "SELECT DISTINCT ofi FROM Office ofi LEFT JOIN ofi.employeeList em JOIN em.clientList cl JOIN cl.orderList or JOIN or.orderDetailList det JOIN det.product pro WHERE LOWER(pro.productRange.range) != LOWER(?1)")
+    List<Object> findOfficesNoSalesRepsOf(String productRange);
+
 }

@@ -35,7 +35,32 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setSalePrice((BigDecimal) obj[4]);
             return productDTO;
         }).collect(Collectors.toList());
+    }
 
+    @Override
+    public List<ProductDTO> findProductNoOrder() {
+        List<Object[]> results = productRepository.findProductNoOrder();
+        return results.stream().map(obj -> {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setProductCode((String) obj[0]);
+            productDTO.setName((String) obj[1]);
+            return productDTO;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> findProductNoOrderAll() {
+        List<Object[]> results = productRepository.findProductNoOrderAll();
+        return results.stream().map(obj -> {
+            ProductDTO productDTO = new ProductDTO();
+            ProductRangeDTO productRangeDTO = new ProductRangeDTO();
+            productDTO.setProductCode((String) obj[0]);
+            productDTO.setName((String) obj[1]);
+            productRangeDTO.setTextDescription((String) obj[2]);
+            productRangeDTO.setImage((String) obj[3]);
+            productDTO.setProductRange(productRangeDTO);
+            return productDTO;
+        }).collect(Collectors.toList());
     }
 
     @Override

@@ -43,4 +43,13 @@ public class OfficeController {
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(offices);
     }
+
+    @GetMapping("/noSalesRep")
+    public ResponseEntity<?> findOfficesNoSalesRepsOf(@RequestParam String productRange) {
+        List<OfficeDTO> results = officeService.findOfficesNoSalesRepsOf(productRange);
+        if (results.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+    }
 }

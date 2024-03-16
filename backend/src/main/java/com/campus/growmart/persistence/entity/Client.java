@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.campus.growmart.persistence.dto.ClientDTO;
+
 @Entity
 @Table(name = "cliente")
 
@@ -186,6 +188,24 @@ public class Client {
 
     public void setPaymentList(List<Payment> paymentList) {
         this.paymentList = paymentList;
+    }
+
+    public ClientDTO convertToDto() {
+        ClientDTO dto = new ClientDTO();
+        dto.setClientCode(this.clientCode);
+        dto.setClientName(this.clientName);
+        dto.setContactName(this.contactName);
+        dto.setContactSurname(this.contactSurname);
+        dto.setPhoneNumber(this.phoneNumber);
+        dto.setFax(this.fax);
+        dto.setLineAdress1(this.lineAdress1);
+        dto.setLineAdress2(this.lineAdress2);
+        dto.setCity(this.city);
+        dto.setRegion(this.region);
+        dto.setCountry(this.country);
+        dto.setPostalCode(this.postalCode);
+        dto.setCreditLimit(this.creditLimit);
+        return dto;
     }
 
     @Override
