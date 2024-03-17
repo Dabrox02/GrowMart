@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.campus.growmart.domain.service.PaymentService;
 import com.campus.growmart.persistence.dto.PaymentDTO;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/payment")
+@PreAuthorize("hasRole('ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 public class PaymentController {
 
     @Autowired
@@ -49,19 +54,19 @@ public class PaymentController {
     }
 
     @GetMapping("/averagePaymentYear")
-    public ResponseEntity<?>  findAveragePayment(@RequestParam String year ) {
+    public ResponseEntity<?> findAveragePayment(@RequestParam String year) {
 
-        Map<String, Object>  results = paymentService.findAveragePayment(year);
-        if(results.isEmpty()){
+        Map<String, Object> results = paymentService.findAveragePayment(year);
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
     }
 
     @GetMapping("/sumAllPaymentsYear")
-    public ResponseEntity<?> findSumAllPaymentsYear(){
+    public ResponseEntity<?> findSumAllPaymentsYear() {
         List<Map<String, Object>> results = paymentService.findSumAllPaymentsYear();
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);

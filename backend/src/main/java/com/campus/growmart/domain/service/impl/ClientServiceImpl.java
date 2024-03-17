@@ -28,7 +28,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientDTO> findByCountryLike(String country) {
-        List<Object> results = clientRepository.findByCountryLike(country);
+        List<Object> results = clientRepository.findByCountryIgnoreCase(country);
 
         return results.stream()
                 .map(obj -> {
@@ -113,7 +113,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Map<String, Object> countByCity(String city) {
-        long results = clientRepository.countByCity(city);
+        long results = clientRepository.countByCityIgnoreCase(city);
         Map<String, Object> clientsAmountPerCity = new HashMap<>();
         clientsAmountPerCity.put("city", city);
         clientsAmountPerCity.put("client_amount", results);

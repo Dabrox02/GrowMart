@@ -13,16 +13,19 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     // Ornamentales y que tienen mas de 100 unidades en stock. El listado debera
     // estar ordenado por su precio de venta, mostrando en primer lugar los de mayor
     // precio.
-    @Query("SELECT p.productCode, p.name, p.productRange.range, p.stock, p.salePrice FROM Product p WHERE LOWER(p.productRange) = ?1 AND p.stock > ?2 ORDER BY p.salePrice DESC")
+    @Query("SELECT p.productCode, p.name, p.productRange.range, p.stock, p.salePrice FROM Product p WHERE LOWER(p.productRange) = LOWER(?1) AND p.stock > ?2 ORDER BY p.salePrice DESC")
     List<Object[]> findProductRangeStock(String range, String stock);
 
     // Devuelve un listado de los productos que nunca han aparecido en un pedido.
     @Query("SELECT DISTINCT pd.productCode, pd.name FROM Product pd LEFT JOIN pd.orderDetailList dp WHERE dp IS NULL")
     List<Object[]> findProductNoOrder();
 
-    // Calcula el precio de venta del producto más caro y más barato en una misma consulta.
+    // Calcula el precio de venta del producto más caro y más barato en una misma
+    // consulta.
     @Query("SELECT MIN(p.salePrice  ) AS most_expensive, MAX(p.salePrice) AS chipest FROM Product p")
-    List<Object[]> findMostExpesiveAndChespest();    // Devuelve un listado de los productos que nunca han aparecido en un pedido.
+    List<Object[]> findMostExpesiveAndChespest(); // Devuelve un listado de los productos que nunca han aparecido en un
+                                                  // pedido.
+
     @Query("SELECT DISTINCT pd.productCode, pd.name, g.textDescription, g.image FROM Product pd JOIN pd.productRange g LEFT JOIN pd.orderDetailList dp WHERE dp IS NULL")
     List<Object[]> findProductNoOrderAll();
 

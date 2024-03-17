@@ -10,7 +10,21 @@ public class Constants {
 
     // Spring Security
     public static final String LOGIN_URL = "/login";
-    public static final String[] SWAGGER = { "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**" };
+    public static final String[] SWAGGER = {
+            "/doc/**",
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/api/v1/auth/**",
+            "/v2/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui/**",
+            "/webjars/**",
+            "/swagger-ui.html" };
     public static final String HEADER_AUTHORIZACION_KEY = "Authorization";
     public static final String TOKEN_BEARER_PREFIX = "Bearer ";
 

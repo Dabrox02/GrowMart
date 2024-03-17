@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface ClientRepository extends JpaRepository<Client, Integer> {
 
     // Devuelve un listado con el nombre de los todos los clientes españoles.
-    List<Object> findByCountryLike(String country);
+    List<Object> findByCountryIgnoreCase(String country);
 
     // Obtén un listado con el nombre de cada cliente y el nombre y apellido de su
     // representante de ventas.
@@ -42,7 +42,7 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     long count();
 
     // ¿Cuántos clientes existen con domicilio en la ciudad de Madrid?
-    long countByCity(String city);
+    long countByCityIgnoreCase(String city);
 
     // ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por
     // 'M'?

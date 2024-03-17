@@ -25,16 +25,11 @@ class WebSecurityConfig {
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(HttpMethod.POST, Constants.LOGIN_URL).permitAll()
-                        .requestMatchers(Constants.SWAGGER).permitAll()
+                        .requestMatchers(HttpMethod.GET, Constants.SWAGGER).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterAfter(jwtAuthorizationFilter,
-                        UsernamePasswordAuthenticationFilter.class);
-
-        http.httpBasic(httpBasic -> {
-            httpBasic.disable();
-        });
+                .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
