@@ -1,11 +1,7 @@
 package com.campus.growmart.domain.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +82,20 @@ public class PaymentServiceImpl implements PaymentService {
         return averagePayment;
 
     }
+
+    @Override
+    public List<Map<String, Object>>  findSumAllPaymentsYear() {
+        List<Object[]>  results = paymentRepository.findSumAllPaymentsYear();
+        List<Map<String, Object>> dataList = new ArrayList<>();
+        results.stream().forEach( obj -> {
+            Map<String, Object> sumAllpaymentsYear = new HashMap<>();
+            sumAllpaymentsYear.put("payment_year",obj[0]);
+            sumAllpaymentsYear.put("payments_sum",obj[1]);
+            dataList.add(sumAllpaymentsYear);
+        });
+        return dataList;
+    }
+
+
 
 }

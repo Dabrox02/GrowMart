@@ -61,5 +61,13 @@ public class PaymentController {
         }
         return ResponseEntity.ok().body(results);
     }
-    
+
+    @GetMapping("/sumAllPaymentsYear")
+    public ResponseEntity<?> findSumAllPaymentsYear(){
+        List<Map<String, Object>> results = paymentService.findSumAllPaymentsYear();
+        if(results.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+    }
 }

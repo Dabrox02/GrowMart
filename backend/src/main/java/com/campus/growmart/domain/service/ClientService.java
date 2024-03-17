@@ -9,7 +9,15 @@ import com.campus.growmart.persistence.entity.Employee;
 public interface ClientService {
 
     List<ClientDTO> findByCountryLike(String country);
-    List<ClientDTO> findDistinctByCityAndSalesRepresentativeEmployeeCode(String city, Employee employee);
-    Map<String, Long> countByCountry();
-    
+    List<ClientDTO> findClientByCityAndEmployeeCode(String city, String employeeCode1 , String employeeCode2);
+    List<Map<String, Object>> countByCountry();
+
+    Map<String, Object> count();
+    Map<String, Object> countByCity(String city);
+
+    List<Map<String, Object>> countClientsCityBeginWith(String initialLetterCity);
+
+    Map<String, Object> clientAmountWithoutEmployee();
+    List<Map<String, Object>> clientFirstLastPayment();
+
 }

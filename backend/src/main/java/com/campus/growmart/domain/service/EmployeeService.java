@@ -1,6 +1,7 @@
 package com.campus.growmart.domain.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.campus.growmart.persistence.dto.EmployeeDTO;
 
@@ -12,6 +13,8 @@ public interface EmployeeService {
 
     List<EmployeeDTO> findNameLastnamePositionNotLike(String position);
 
-    long count();
+    Map<String, Object> count();
+
+    List<Map<String, Object>> findEmployeeAmountClients();
 
 }

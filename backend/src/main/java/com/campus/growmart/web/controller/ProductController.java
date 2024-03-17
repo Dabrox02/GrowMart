@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProductController {
@@ -23,6 +24,16 @@ public class ProductController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(results);
+    }
+
+    @GetMapping("/findPriceHighestLowest")
+    public ResponseEntity<?>  findMostExpesiveAndChespest(){
+        Map<String, Object> results = productService.findMostExpesiveAndChespest();
+        if (results.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+
     }
 
 }

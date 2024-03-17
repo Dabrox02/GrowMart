@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.campus.growmart.domain.service.ProductService;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,5 +36,17 @@ public class ProductServiceImpl implements ProductService {
             return productDTO;
         }).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public Map<String, Object> findMostExpesiveAndChespest() {
+        List<Object[]> results = productRepository.findMostExpesiveAndChespest();
+        Map<String, Object> mostExpensiveAndCheapest = new HashMap<>();
+        results.stream().forEach(obj->{
+            mostExpensiveAndCheapest.put("most_expensive_price", obj[0] );
+            mostExpensiveAndCheapest.put("cheapest_price", obj[1] );
+        });
+
+        return mostExpensiveAndCheapest;
     }
 }

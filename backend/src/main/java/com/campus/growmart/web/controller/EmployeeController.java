@@ -1,6 +1,7 @@
 package com.campus.growmart.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,12 +51,21 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employees);
     }
 
-    @GetMapping("/count")
+    @GetMapping("/countEmployeesAmount")
     public ResponseEntity<?>  count() {
-        long results = employeeService.count();
+        Map<String, Object> results = employeeService.count();
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
-        
     }
-    
+
+    @GetMapping("/employeeAmountClients")
+    public ResponseEntity<?> findEmployeeAmountClients(){
+        List<Map<String, Object>> results = employeeService.findEmployeeAmountClients();
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
+    }
+
 
 }

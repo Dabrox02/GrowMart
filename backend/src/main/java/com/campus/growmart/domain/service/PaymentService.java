@@ -15,4 +15,6 @@ public interface PaymentService {
 
     Map<String, Object>  findAveragePayment(String year );
 
+    List<Map<String, Object>>  findSumAllPaymentsYear();
+
 }

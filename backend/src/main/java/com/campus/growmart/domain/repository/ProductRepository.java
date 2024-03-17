@@ -14,6 +14,8 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     List<Object[]> findProductRangeStock(String range, String stock);
 
 
-
+    // Calcula el precio de venta del producto más caro y más barato en una misma consulta.
+    @Query("SELECT MIN(p.salePrice  ) AS most_expensive, MAX(p.salePrice) AS chipest FROM Product p")
+    List<Object[]> findMostExpesiveAndChespest();
 
 }

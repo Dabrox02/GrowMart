@@ -26,5 +26,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     // ¿Cuántos empleados hay en la compañía? 
     long count();
 
+    // Devuelve el nombre de los representantes de ventas y el número de clientes al que atiende cada uno.
+    @Query("SELECT CONCAT(e.name, ' ', e.surname1) , COUNT(c.clientCode) FROM Employee e LEFT JOIN e.clientList c GROUP BY e.name, e.surname1")
+    List<Object[]> findEmployeeAmountClients();
+
+
     
 }

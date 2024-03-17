@@ -29,5 +29,11 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate, o.state  FROM Order o WHERE LOWER(o.state) = 'entregado' AND MONTH(o.deliveryDate) = ?1")
     List<Object[]> findOrdersDeliveredMonth(String month) ;
 
+    // ¿Cuántos pedidos hay en cada estado? Ordena el resultado de forma descendente por el número de pedidos.
+
+    @Query("SELECT o.state, COUNT(*) AS amount_per_state FROM Order o GROUP BY o.state ORDER BY COUNT(*) DESC")
+    List<Object[]> findOrdersPerState ();
+
+
     }
 

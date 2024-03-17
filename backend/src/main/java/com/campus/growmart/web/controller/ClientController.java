@@ -30,12 +30,8 @@ public class ClientController {
     }
 
     @GetMapping("/clientCityEmployee")
-    public ResponseEntity<?> findDistinctByCityAndSalesRepresentativeEmployeeCode(@RequestParam String city, @RequestParam String employeeCode){
-
-        Employee employee = new Employee();
-        employee.setEmployeeCode(  Integer.parseInt(employeeCode) );
-
-        List<ClientDTO> results = clientService.findDistinctByCityAndSalesRepresentativeEmployeeCode(city,employee);
+    public ResponseEntity<?> findClientByCityAndEmployeeCode(@RequestParam String city, @RequestParam String employeeCode, @RequestParam String employeeCode2){
+        List<ClientDTO> results = clientService.findClientByCityAndEmployeeCode(city,employeeCode, employeeCode2);
 
         if (results.isEmpty())
             return ResponseEntity.noContent().build();
@@ -44,11 +40,51 @@ public class ClientController {
 
     @GetMapping("/countByCountry")
     public ResponseEntity<?>  countByCountry( ) {
-        Map<String, Long> results = clientService.countByCountry() ;
+        List<Map<String, Object>> results = clientService.countByCountry() ;
         if (results.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
     }
-    
 
+    @GetMapping("/countClientsAmount")
+    public ResponseEntity<?> count(){
+        Map<String, Object> results = clientService.count();
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
+    }
+
+
+    @GetMapping("/countClientsAmountCity")
+    public ResponseEntity<?> countByCity(@RequestParam String city){
+        Map<String, Object> results = clientService.countByCity(city);
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
+    }
+
+
+    @GetMapping("/countClientsCityBeginWith")
+    public ResponseEntity<?> countClientsCityBeginWith(@RequestParam String initialLetterCity){
+        List<Map<String, Object>> results = clientService.countClientsCityBeginWith(initialLetterCity);
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
+
+    }
+    @GetMapping("/countClientsWithoutEmployee")
+    public ResponseEntity<?> clientAmountWithoutEmployee(){
+        Map<String, Object> results = clientService.clientAmountWithoutEmployee();
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
+    }
+
+    @GetMapping("/clientFirstLastPayment")
+    public ResponseEntity<?> clientFirstLastPayment(){
+        List<Map<String, Object>> results = clientService.clientFirstLastPayment();
+        if (results.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(results);
+    }
 }

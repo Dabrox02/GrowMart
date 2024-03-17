@@ -1,7 +1,6 @@
 package com.campus.growmart.domain.service.impl;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +93,22 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setState((String) obj[4]);
             return orderDTO;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Map<String, Object>> findOrdersPerState() {
+        List<Object[]> results = orderRepository.findOrdersPerState();
+        List<Map<String, Object>> dataList = new ArrayList<>();
+
+        results.stream().forEach(  obj ->{
+
+            Map<String, Object> ordersPerState = new HashMap<>();
+            ordersPerState.put( "state", (String) obj[0] );
+            ordersPerState.put( "orders_amount", (Long) obj[1] );
+            dataList.add(ordersPerState);
+
+        });
+        return dataList;
     }
 
 }

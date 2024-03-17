@@ -1,6 +1,7 @@
 package com.campus.growmart.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +58,15 @@ public class OrderController {
     @GetMapping("/deliveredMonth")
     public ResponseEntity<?> findOrdersdeliveredMonth(@RequestParam String month) {
         List<OrderDTO> results = orderService.findOrdersdeliveredMonth(month);
+        if (results.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(results);
+    }
+
+    @GetMapping("/ordersPerState")
+    public ResponseEntity<?> findOrdersPerState(){
+        List<Map<String, Object>> results = orderService.findOrdersPerState();
         if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

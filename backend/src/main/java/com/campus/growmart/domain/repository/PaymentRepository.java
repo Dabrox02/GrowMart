@@ -24,6 +24,10 @@ public interface PaymentRepository extends JpaRepository<Payment, Object> {
 
     // ¿Cuál fue el pago medio en 2009?
     @Query("SELECT AVG(p.total), p.paymentDate FROM Payment p WHERE YEAR(p.paymentDate) = ?1 group by p.paymentDate")
-    List<Object[]> findAveragePayment( String year ); 
+    List<Object[]> findAveragePayment( String year );
+
+    // Muestre la suma total de todos los pagos que se realizaron para cada uno de los años que aparecen en la tabla pagos.
+    @Query("SELECT YEAR(p.paymentDate), SUM(p.total) FROM Payment p GROUP BY YEAR(p.paymentDate) ORDER BY YEAR(p.paymentDate)")
+    List<Object[]> findSumAllPaymentsYear();
 
 }
