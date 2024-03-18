@@ -29,7 +29,7 @@ public class AuthController {
         UserSystemDTO userSystemDTO = authService.login(username, password);
 
         if (userSystemDTO == null) {
-            throw new UsernameNotFoundException("No existe el usuario");
+            throw new UsernameNotFoundException("User Not exists");
         }
         return ResponseEntity.ok().body(userSystemDTO);
     }
@@ -46,11 +46,17 @@ public class AuthController {
         return ResponseEntity.ok(userSystemDTO);
     }
 
-    @PostMapping("/validateToken")
+    @PostMapping("validateToken")
     public ResponseEntity<?> validateToken(
             @RequestParam("token") String token) {
         Map<String, Boolean> validToken = authService.validateToken(token);
         return ResponseEntity.ok(validToken);
+    }
+
+    @PostMapping("test")
+    public String test(
+            @RequestParam("token") String token) {
+        return "Token recibido es " + token;
     }
 
 }

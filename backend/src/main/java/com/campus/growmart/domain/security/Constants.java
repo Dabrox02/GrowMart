@@ -9,7 +9,7 @@ import java.security.Key;
 public class Constants {
 
     // Spring Security
-    public static final String[] AUTH = { "/login", "/register", "/validateToken" };
+    public static final String[] AUTH = { "/login", "/register", "/validateToken", "/test" };
     public static final String[] SWAGGER = {
             "/doc/**",
             "/swagger-ui.html",
