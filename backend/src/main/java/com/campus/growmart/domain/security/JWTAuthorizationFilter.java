@@ -15,16 +15,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.campus.growmart.domain.security.Constants.*;
-
 @Component
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     private Claims setSigningKey(HttpServletRequest request) {
-        String jwtToken = request.getHeader(HEADER_AUTHORIZACION_KEY).replace(TOKEN_BEARER_PREFIX, "");
+        String jwtToken = request.getHeader(Constants.HEADER_AUTHORIZACION_KEY).replace(Constants.TOKEN_BEARER_PREFIX,
+                "");
 
         return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey(SUPER_SECRET_KEY))
+                .setSigningKey(Constants.getSigningKey(Constants.SUPER_SECRET_KEY))
                 .build()
                 .parseClaimsJws(jwtToken)
                 .getBody();
@@ -40,8 +39,8 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private boolean isJWTValid(HttpServletRequest request, HttpServletResponse res) {
-        String authenticationHeader = request.getHeader(HEADER_AUTHORIZACION_KEY);
-        if (authenticationHeader == null || !authenticationHeader.startsWith(TOKEN_BEARER_PREFIX))
+        String authenticationHeader = request.getHeader(Constants.HEADER_AUTHORIZACION_KEY);
+        if (authenticationHeader == null || !authenticationHeader.startsWith(Constants.TOKEN_BEARER_PREFIX))
             return false;
         return true;
     }
