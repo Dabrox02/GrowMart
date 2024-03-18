@@ -62,10 +62,18 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Map<String, Boolean> validateToken(String token) {
+    public Map<String, Object> validateToken(String token) {
+        Boolean validAcces = false;
         Boolean isJWTValid = jwtAuthorizationFilter.isJWTValid(token);
-        Map<String, Boolean> responseToken = new HashMap<>();
-        responseToken.put("isTokenValid", isJWTValid);
+        if (isJWTValid) {
+            String username = jwtAuthorizationFilter.getClaims(token).getSubject();
+            UserSystem user = userSystemRepository.findByUsername(username).orElse(null);
+            if (user != null) {
+                validAcces = true;
+            }
+        }
+        Map<String, Object> responseToken = new HashMap<>();
+        responseToken.put("isTokenValid", validAcces);
         return responseToken;
     }
 

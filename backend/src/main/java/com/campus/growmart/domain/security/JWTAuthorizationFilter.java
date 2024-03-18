@@ -37,6 +37,15 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         }
     }
 
+    public Claims getClaims(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(Constants.getSigningKey(Constants.SUPER_SECRET_KEY))
+                .build()
+                .parseClaimsJws(token.replace("Bearer ", ""))
+                .getBody();
+        return claims;
+    }
+
     private Claims setSigningKey(HttpServletRequest request) {
         String jwtToken = request.getHeader(Constants.HEADER_AUTHORIZACION_KEY).replace(Constants.TOKEN_BEARER_PREFIX,
                 "");

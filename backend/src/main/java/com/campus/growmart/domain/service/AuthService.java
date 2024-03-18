@@ -10,5 +10,5 @@ public interface AuthService {
 
     UserSystemDTO register(String username, String password);
 
-    Map<String, Boolean> validateToken(String token);
+    Map<String, Object> validateToken(String token);
 }

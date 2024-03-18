@@ -49,14 +49,8 @@ public class AuthController {
     @PostMapping("validateToken")
     public ResponseEntity<?> validateToken(
             @RequestParam("token") String token) {
-        Map<String, Boolean> validToken = authService.validateToken(token);
+        Map<String, Object> validToken = authService.validateToken(token);
         return ResponseEntity.ok(validToken);
-    }
-
-    @PostMapping("test")
-    public String test(
-            @RequestParam("token") String token) {
-        return "Token recibido es " + token;
     }
 
 }
