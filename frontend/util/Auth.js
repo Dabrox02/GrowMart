@@ -37,8 +37,7 @@ export const registerUser = async (username, password) => {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error:', error.message);
-            throw error;
+            return { error }
         }
     }
 }

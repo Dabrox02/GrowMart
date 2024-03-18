@@ -1,31 +1,35 @@
 import { home } from "./js/home.js";
 import { login } from "./js/login.js";
+import { register } from "./js/register.js";
 import { getLs, validateToken } from "./util/Auth.js";
+import { routes } from "./util/Routes.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
 const $a = (e) => d.querySelectorAll(e);
 
 export const app = async () => {
-    let path = window.location.pathname.split(".")[0];
-    console.log(path);
+    let path = window.location.href;
+    const routeValues = Object.values(routes);
 
-    if (path === "/frontend/pages/login") {
+    if (routes.root.includes(path)) {
+        if (getLs('token') && getLs('username')) {
+            if (validateToken(getLs('token'))) {
+                location.href = routes.home;
+            }
+        }
+        location.href = routes.login;
+    }
+
+    if (path === routes.login) {
         await login();
     }
 
-    if (path === "/frontend/pages/register") {
-        console.log("hola register");
+    if (path === routes.register) {
+        await register();
     }
 
-    if (path === "/frontend/pages/home") {
+    if (path === routes.home) {
         await home();
     }
-
-    // if (getLs('token') && getLs('username')) {
-    //     if (validateToken(getLs('token'))) {
-    //         location.href = 'http://localhost:5500/frontend/pages/home.html';
-    //     }
-    // }
-    // location.href = 'http://localhost:5500/frontend/pages/login.html';
 }  
