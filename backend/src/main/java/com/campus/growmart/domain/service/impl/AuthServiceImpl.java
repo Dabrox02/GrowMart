@@ -1,10 +1,14 @@
 package com.campus.growmart.domain.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.campus.growmart.domain.repository.UserSystemRepository;
+import com.campus.growmart.domain.security.JWTAuthorizationFilter;
 import com.campus.growmart.domain.security.JWTAuthtenticationConfig;
 import com.campus.growmart.domain.service.AuthService;
 import com.campus.growmart.persistence.dto.UserSystemDTO;
@@ -22,6 +26,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     JWTAuthtenticationConfig jwtAuthtenticationConfig;
+
+    @Autowired
+    JWTAuthorizationFilter jwtAuthorizationFilter;
 
     @Override
     public UserSystemDTO login(String username, String password) {
@@ -52,6 +59,14 @@ public class AuthServiceImpl implements AuthService {
             return userSystemDTO;
         }
         return null;
+    }
+
+    @Override
+    public Map<String, Boolean> validateToken(String token) {
+        Boolean isJWTValid = jwtAuthorizationFilter.isJWTValid(token);
+        Map<String, Boolean> responseToken = new HashMap<>();
+        responseToken.put("isTokenValid", isJWTValid);
+        return responseToken;
     }
 
 }

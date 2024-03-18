@@ -1,5 +1,8 @@
 package com.campus.growmart.domain.exception;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,6 +12,14 @@ import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(InvalidTokenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<Object> handleNumberFormatException(Exception ex) {
+        Map<String, Boolean> responseToken = new HashMap<>();
+        responseToken.put("isTokenValid", false);
+        return new ResponseEntity<>(responseToken, HttpStatus.FORBIDDEN);
+    }
 
     @ExceptionHandler(NumberFormatException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

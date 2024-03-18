@@ -1,5 +1,7 @@
 package com.campus.growmart.web.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -42,6 +44,13 @@ public class AuthController {
             throw new Error("Cannot created user");
         }
         return ResponseEntity.ok(userSystemDTO);
+    }
+
+    @PostMapping("/validateToken")
+    public ResponseEntity<?> validateToken(
+            @RequestParam("token") String token) {
+        Map<String, Boolean> validToken = authService.validateToken(token);
+        return ResponseEntity.ok(validToken);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.campus.growmart.domain.service;
 
+import java.util.Map;
+
 import com.campus.growmart.persistence.dto.UserSystemDTO;
 
 public interface AuthService {
@@ -8,4 +10,5 @@ public interface AuthService {
 
     UserSystemDTO register(String username, String password);
 
+    Map<String, Boolean> validateToken(String token);
 }
