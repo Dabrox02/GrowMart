@@ -27,11 +27,13 @@ public class AuthServiceImpl implements AuthService {
     public UserSystemDTO login(String username, String password) {
         UserSystem user = userSystemRepository.findByUsername(username).orElse(null);
         if (user != null) {
-            String token = jwtAuthtenticationConfig.getJWTToken(user.getUsername());
-            UserSystemDTO userSystemDTO = new UserSystemDTO();
-            userSystemDTO.setUsername(username);
-            userSystemDTO.setToken(token);
-            return userSystemDTO;
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                String token = jwtAuthtenticationConfig.getJWTToken(user.getUsername());
+                UserSystemDTO userSystemDTO = new UserSystemDTO();
+                userSystemDTO.setUsername(username);
+                userSystemDTO.setToken(token);
+                return userSystemDTO;
+            }
         }
         return null;
     }
