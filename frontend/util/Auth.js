@@ -1,12 +1,26 @@
 import config from "../api/config.js"
 
+export const validateToken = async (token) => {
+    if (token) {
+        try {
+            const response = await fetch(`${config.uri}/validateToken?token=${token}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error:', error.message);
+            throw error;
+        }
+    }
+}
+
 export const registerUser = async (username, password) => {
     if (username && password) {
         try {
-            const body = {
-                "username": username,
-                "password": password
-            }
             const response = await fetch(`${config.uri}/register`, {
                 method: 'POST',
                 headers: {
@@ -18,7 +32,7 @@ export const registerUser = async (username, password) => {
                 })
             });
             if (!response.ok) {
-                throw new Error('Error verifying register user');
+                throw new Error('Cannot Created : Verifying user data');
             }
             const data = await response.json();
             return data;
@@ -43,16 +57,14 @@ export async function loginUser(username, password) {
                 })
             });
             if (!response.ok) {
-                throw new Error('Error incorrect data');
+                throw new Error('Cannot Access: Incorrect data');
             }
             const data = await response.json();
-            console.log(data);
             saveLs('token', data.token);
             saveLs('username', data.username);
             return data;
         } catch (error) {
             console.error('Error:', error.message);
-            throw error;
         }
     }
 }
