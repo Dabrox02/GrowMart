@@ -45,10 +45,9 @@ export const login = async (e) => {
         }
     }
 
-    d.addEventListener("click", async (e)=>{
+    d.addEventListener("click", async (e) => {
         if (e.target.matches("#btn-login-user")) {
             let data = Object.fromEntries(new FormData($("#frm-login-user")))
-            console.log(data);
 
             const conditions = [
                 data.username !== "",

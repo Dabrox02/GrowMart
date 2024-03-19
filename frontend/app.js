@@ -10,7 +10,6 @@ const $a = (e) => d.querySelectorAll(e);
 
 export const app = async () => {
     let path = window.location.href;
-    const routeValues = Object.values(routes);
 
     if (routes.root.includes(path)) {
         if (getLs('token') && getLs('username')) {

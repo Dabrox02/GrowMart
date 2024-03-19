@@ -33,7 +33,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                     .getBody();
             return true;
         } catch (Exception e) {
-            throw new InvalidTokenException("Token invalido");
+            throw new InvalidTokenException("Invalid Token");
         }
     }
 

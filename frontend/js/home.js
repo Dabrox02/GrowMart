@@ -3,6 +3,7 @@ import { routes } from "../util/Routes.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
+const $a = (e) => d.querySelectorAll(e);
 
 const swalSucces = () => {
     let timerInterval;
@@ -34,6 +35,10 @@ export const home = async (e) => {
 
 
             d.addEventListener("click", (e) => {
+                if (e.target.matches("li.nav-item") || e.target.closest("li.nav-item")) {
+                    e.preventDefault();
+                }
+
                 if (e.target.matches('[data-widget="logout"]') || e.target.closest('[data-widget="logout"]')) {
                     swalSucces();
                     deleteLs("token");

@@ -1,0 +1,52 @@
+{
+    "nav-items": [
+        {
+            "nav-link": {
+                "icon": "<i class='nav-icon fas fa-cart-shopping'></i>",
+                "text": "Products",
+                "href": "",
+                "query": 5
+            }
+        },
+        {
+            "nav-link": {
+                "icon": "<i class='nav-icon fas fa-users'></i>",
+                "text": "Clients",
+                "href": "",
+                "query": 5
+            }
+        },
+        {
+            "nav-link": {
+                "icon": "<i class='nav-icon fas fa-person'></i>",
+                "text": "Employees",
+                "href": "",
+                "query": 5
+            }
+        },
+        {
+            "nav-link": {
+                "icon": "<i class='nav-icon fas fa-house'></i>",
+                "text": "Offices",
+                "href": "",
+                "query": 5
+            }
+        },
+        {
+            "nav-link": {
+                "icon": "<i class='nav-icon fas fa-file'></i>",
+                "text": "Orders",
+                "href": "",
+                "query": 5
+            }
+        },
+        {
+            "nav-link": {
+                "icon": "<i class='nav-icon fas fa-cash-register'></i>",
+                "text": "Payments",
+                "href": "",
+                "query": 5
+            }
+        }
+    ]
+}
