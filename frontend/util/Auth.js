@@ -37,6 +37,7 @@ export const registerUser = async (username, password) => {
             const data = await response.json();
             return data;
         } catch (error) {
+            console.error('Error:', error.message);
             return { error }
         }
     }
@@ -64,6 +65,7 @@ export async function loginUser(username, password) {
             return data;
         } catch (error) {
             console.error('Error:', error.message);
+            return { error }
         }
     }
 }
@@ -74,7 +76,7 @@ const saveLs = (key, value) => {
     }
 }
 
-const deleteLs = (key) => {
+export const deleteLs = (key) => {
     localStorage.removeItem(key);
 }
 
