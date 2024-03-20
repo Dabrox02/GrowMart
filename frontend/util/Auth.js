@@ -81,13 +81,14 @@ export const getRequest = async ({ path, config, needParams, params }, host, mai
             path = `${path}${queryParams ? `?${queryParams}` : ""}`;
         }
         const response = await fetch(path, config);
-        if (response.status === "200") {
+        if (response.status === 200) {
             return await response.json();
         } else {
-            return { status: response.status, message: "No content" }
+            let { message } = await response.json();
+            return { status: response.status, message }
         }
     } catch (error) {
-        return { error };
+        return { status: 404, error };
     }
 }
 

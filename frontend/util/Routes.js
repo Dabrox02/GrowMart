@@ -346,7 +346,291 @@ export const queries = {
             },
             needParams: true,
             params: {
-                codePass: "7"
+                codeBoss: "7"
+            }
+        },
+        query10: {
+            description: "Returns the name of the sales representatives and the number of clients each one serves.",
+            path: `/employeeAmountClients`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query11: {
+            description: "How many employees are there in the company?",
+            path: `/countEmployeesAmount`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query12: {
+            description: "Obtain a list with the name of each client and the first and last name of their sales representative.",
+            path: `/clients`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query13: {
+            description: "Return the job title, first name, last name, and email of the company's CEO.",
+            path: `/boss`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        }
+    },
+    offices: {
+        mainRoute: "/office",
+        query1: {
+            description: "Return a list with the office code and the city where there are offices.",
+            path: `/officeCode/city`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {}
+        },
+        query2: {
+            description:
+                "Return the offices where none of the employees who have been sales representatives for any client that has made a purchase of any product from the 'Frutales' range work.",
+            path: `/noSalesRep`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                productRange: "frutales"
+            }
+        },
+        query3: {
+            description: "Return a list with the city and phone number of the offices in Spain.",
+            path: `/country`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                country: "espana"
+            }
+        },
+        query4: {
+            description: "List the addresses of the offices that have clients in Fuenlabrada.",
+            path: `/clients/city`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                city: "fuenlabrada"
+            }
+        }
+    },
+    orders: {
+        mainRoute: "/order",
+        query1: {
+            description: "Return a list of all orders that were rejected in 2009.",
+            path: `/rejectedYear`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                year: "2009"
+            }
+        },
+        query2: {
+            description: "How many orders are there in each state? Order the result in descending order by the number of orders.",
+            path: `/ordersPerState`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query3: {
+            description: "Return a list with the order code, customer code, expected date, and delivery date of orders that have not been delivered on time.",
+            path: `/notInTime`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query4: {
+            description: "Return a list of all orders that have been delivered in the month of January of any year.",
+            path: `/deliveredMonth`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                month: "1"
+            }
+        },
+        query5: {
+            description: "Return a list with the order code, customer code, expected date, and delivery date of orders where the delivery date has been at least two days before the expected date.",
+            path: `/beforeExpected`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query6: {
+            description: "Return a list with the different states that an order can go through.",
+            path: `/allStates`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        }
+    },
+    details: {
+        mainRoute: "/orderDetail",
+        query1: {
+            description: "List the total sales of the products that have billed more than 3000 euros. It will display the name, units sold, total billed, and total billed with taxes (21% IVA).",
+            path: `/productsBillingMoreThan`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                moreThan: "3000"
+            }
+        },
+        query2: {
+            description: "Return a list of the top 20 best-selling products and the total number of units sold for each one. The list should be sorted by the total number of units sold.",
+            path: `/findBestSellingProductsLimit`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                limit: "20"
+            }
+        },
+        query3: {
+            description: "The total billing that the company has had throughout its history, indicating the taxable base, the VAT, and the total billed. The taxable base is calculated by adding the product cost multiplied by the number of units sold from the order detail table. The IVA is 21% of the taxable base, and the total is the sum of the previous two fields.",
+            path: `/companyBilling`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query4: {
+            description: "The total billing that the company has had throughout its history, indicating the taxable base, the VAT, and the total billed. The taxable base is calculated by summing the product cost multiplied by the number of units sold from the order detail table. The IVA is 21% of the taxable base, and the total is the sum of the previous two fields. Grouped by each product code.",
+            path: `/companyBillingProductCode`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query5: {
+            description: "The total billing that the company has had throughout its history, indicating the taxable base, the VAT, and the total billed. The taxable base is calculated by summing the product cost multiplied by the number of units sold from the order detail table. The IVA is 21% of the taxable base, and the total is the sum of the previous two fields. Grouped by product code filtered by codes starting with 'OR'.",
+            path: `/companyBillingProductCodeBeginsWith`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                beginsWith: "or"
+            }
+        },
+        query6: {
+            description: "Calculate the sum of the total quantity of all products appearing in each of the orders.",
+            path: `/amountProductsInOrder`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query7: {
+            description: "Calculate the number of different products in each of the orders.",
+            path: `/amountDistinctProductsInOrder`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        }
+    },
+    payments: {
+        mainRoute: "/payment",
+        query1: {
+            description: "Show the total sum of all payments made for each of the years appearing in the payments table.",
+            path: `/sumAllPaymentsYear`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query2: {
+            description: "Return a list of all payments made in the year 2009 through PayPal. Sort the result from highest to lowest.",
+            path: `/paymentMethodYear`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                method: "paypal",
+                year: "2009"
+            }
+        },
+        query3: {
+            description: "Return a list with the customer code of those customers who made any payment in 2008. Please note that you should remove any duplicate customer codes.",
+            path: `/clientCodes`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                year: "2008"
+            }
+        },
+        query4: {
+            description: "What was the average payment in 2009?",
+            path: `/averagePaymentYear`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                year: "2009"
+            }
+        },
+        query5: {
+            description: "Return a list of all payment methods that appear in the payment table. Please note that duplicate payment methods should not appear.",
+            path: `/allPaymentMethods`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
             }
         }
     }
