@@ -1,5 +1,6 @@
 import { getLs, deleteLs, validateToken } from "../util/Auth.js";
 import { routes } from "../util/Routes.js";
+import { loadQuery } from "../api/querys.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
@@ -30,16 +31,14 @@ export const home = async (e) => {
         let validLogin = await validateToken(getLs('token'));
         if (validLogin && validLogin.isTokenValid) {
             let username = getLs("username");
-            let token = getLs("token");
             $("#main-sidebar").setAttribute("username", username);
-
-
-            d.addEventListener("click", (e) => {
+            d.addEventListener("click", async (e) => {
                 if (e.target.matches('[data-widget="logout"]') || e.target.closest('[data-widget="logout"]')) {
                     swalSucces();
                     deleteLs("token");
                     deleteLs("username");
                 }
+                await loadQuery(e);
             })
         } else {
             location.href = routes.login;

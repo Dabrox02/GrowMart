@@ -13,8 +13,8 @@ const navItems = async (jsonFilePath) => {
       if (typeof query === 'number' && query > 0) {
         for (let i = 1; i <= query; i++) {
           listItemsHTML += /*html */`
-          <li id="query-${text.toLowerCase()}-${i}" class="nav-item">
-            <a href class="nav-link text-white">
+          <li id="query" class="nav-item" data-type="${text.toLowerCase()}" data-query-number="${i}">
+            <a class="nav-link text-white">
               <i class="fa-solid fa-arrow-right px-2"></i>
               <p>Query ${i}</p>
             </a>

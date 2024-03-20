@@ -70,9 +70,21 @@ export async function loginUser(username, password) {
     }
 }
 
-const saveLs = (key, value) => {
-    if (key && value) {
-        localStorage.setItem(key, value);
+export const getRequest = async ({ path, config, needParams, params }, host, mainRoute, token) => {
+    try {
+        let queryParams;
+        config.headers = { 'Authorization': token };
+        path = `${host}${mainRoute}${path}`;
+        console.log(path);
+        if (needParams) {
+            config.headers = { ...config.headers, "Content-Type": "application/x-www-form-urlencoded" }
+            queryParams = new URLSearchParams({ ...params }).toString();
+            path = `${path}${queryParams ? `?${queryParams}` : ""}`;
+        }
+        const response = await fetch(path, config);
+        return await response.json();
+    } catch (error) {
+        return { error };
     }
 }
 
@@ -84,30 +96,8 @@ export const getLs = (key) => {
     return localStorage.getItem(key);
 }
 
-const deleteBearer = (token) => {
-    return token.startsWith('Bearer ') ? token.slice(7) : token;
+const saveLs = (key, value) => {
+    if (key && value) {
+        localStorage.setItem(key, value);
+    }
 }
-
-
-// export async function obtenerEmpleadosConJefe() {
-//     const url = 'http://localhost:8080/order/ordersPerState';
-//     try {
-//         console.log(getToken());
-//         const response = await fetch(url, {
-//             method: 'GET',
-//             headers: {
-//                 'Authorization': getToken() // Incluir el token en el encabezado Authorization
-//             }
-//         });
-
-//         if (!response.ok) {
-//             throw new Error('Error al obtener los empleados');
-//         }
-
-//         const data = await response.json();
-//         console.log(data);
-//     } catch (error) {
-//         console.error('Error:', error.message);
-//         throw error;
-//     }
-// }
