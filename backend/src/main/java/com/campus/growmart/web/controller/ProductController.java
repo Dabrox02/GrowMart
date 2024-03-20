@@ -25,7 +25,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/productsRangePrice")
+    @GetMapping("/productsRangeStock")
     public ResponseEntity<?> findProductRangeStock(@RequestParam String range, @RequestParam String stock) {
         List<ProductDTO> results = productService.findProductRangeStock(range, stock);
         if (results.isEmpty()) {
@@ -35,7 +35,7 @@ public class ProductController {
     }
 
     @GetMapping("/findPriceHighestLowest")
-    public ResponseEntity<?>  findMostExpesiveAndChespest(){
+    public ResponseEntity<?> findMostExpesiveAndChespest() {
         Map<String, Object> results = productService.findMostExpesiveAndChespest();
         if (results.isEmpty()) {
             return ResponseEntity.noContent().build();

@@ -23,9 +23,9 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     // Calcula el precio de venta del producto más caro y más barato en una misma
     // consulta.
     @Query("SELECT MIN(p.salePrice  ) AS most_expensive, MAX(p.salePrice) AS chipest FROM Product p")
-    List<Object[]> findMostExpesiveAndChespest(); // Devuelve un listado de los productos que nunca han aparecido en un
-                                                  // pedido.
-
+    List<Object[]> findMostExpesiveAndChespest(); 
+    
+    // Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto.
     @Query("SELECT DISTINCT pd.productCode, pd.name, g.textDescription, g.image FROM Product pd JOIN pd.productRange g LEFT JOIN pd.orderDetailList dp WHERE dp IS NULL")
     List<Object[]> findProductNoOrderAll();
 
