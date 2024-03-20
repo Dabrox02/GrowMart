@@ -19,25 +19,24 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentRepository paymentRepository;
 
     @Override
-    public List<PaymentDTO> findClientCodesPaymentYear(String year) {        
+    public List<PaymentDTO> findClientCodesPaymentYear(String year) {
         List<Object> results = paymentRepository.findClientCodesPaymentYear(year);
 
-        return results.stream().map( obj ->{
-                PaymentDTO paymentDTO = new PaymentDTO();
-                ClientDTO clientDTO = new ClientDTO();
-                clientDTO.setClientCode((Integer) obj);
-                paymentDTO.setClient(clientDTO);
-                return paymentDTO;
-            }
-        ).collect(Collectors.toList());
+        return results.stream().map(obj -> {
+            PaymentDTO paymentDTO = new PaymentDTO();
+            ClientDTO clientDTO = new ClientDTO();
+            clientDTO.setClientCode((Integer) obj);
+            paymentDTO.setClient(clientDTO);
+            return paymentDTO;
+        }).collect(Collectors.toList());
 
     }
 
     @Override
     public List<PaymentDTO> findPaymentsYearMethod(String method, String year) {
-        List<Object[]> results = paymentRepository.findPaymentsYearMethod(method,year );
+        List<Object[]> results = paymentRepository.findPaymentsYearMethod(method, year);
 
-        return results.stream().map( obj -> {
+        return results.stream().map(obj -> {
             PaymentDTO paymentDTO = new PaymentDTO();
             ClientDTO clientDTO = new ClientDTO();
             clientDTO.setClientCode((Integer) obj[0]);
@@ -48,7 +47,7 @@ public class PaymentServiceImpl implements PaymentService {
             paymentDTO.setTotal((BigDecimal) obj[4]);
             return paymentDTO;
 
-        } ).collect(Collectors.toList());
+        }).collect(Collectors.toList());
 
     }
 
@@ -61,41 +60,35 @@ public class PaymentServiceImpl implements PaymentService {
             paymentDTO.setPaymentMethod((String) obj);
             return paymentDTO;
 
-
         }).collect(Collectors.toList());
 
     }
 
     @Override
-    public Map<String, Object>  findAveragePayment(String year ) {
-        
-        List<Object[]>  results = paymentRepository.findAveragePayment(year);
-        Map<String, Object> averagePayment = new HashMap<>();
-        results.stream().forEach( obj -> {
-            Date date = (Date) obj[1];
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            averagePayment.put( "year", calendar.get(Calendar.YEAR));
-            averagePayment.put( "average", (Double)obj[0]);
+    public List<Map<String, Object>> findAveragePayment(String year) {
+        List<Object[]> results = paymentRepository.findAveragePayment(year);
+        List<Map<String, Object>> dataList = new ArrayList<>();
+        results.stream().forEach(obj -> {
+            Map<String, Object> averagePayment = new HashMap<>();
+            averagePayment.put("year", (Integer) obj[1]);
+            averagePayment.put("average", (Double) obj[0]);
+            dataList.add(averagePayment);
         });
-
-        return averagePayment;
+        return dataList;
 
     }
 
     @Override
-    public List<Map<String, Object>>  findSumAllPaymentsYear() {
-        List<Object[]>  results = paymentRepository.findSumAllPaymentsYear();
+    public List<Map<String, Object>> findSumAllPaymentsYear() {
+        List<Object[]> results = paymentRepository.findSumAllPaymentsYear();
         List<Map<String, Object>> dataList = new ArrayList<>();
-        results.stream().forEach( obj -> {
+        results.stream().forEach(obj -> {
             Map<String, Object> sumAllpaymentsYear = new HashMap<>();
-            sumAllpaymentsYear.put("payment_year",obj[0]);
-            sumAllpaymentsYear.put("payments_sum",obj[1]);
+            sumAllpaymentsYear.put("payment_year", obj[0]);
+            sumAllpaymentsYear.put("payments_sum", obj[1]);
             dataList.add(sumAllpaymentsYear);
         });
         return dataList;
     }
-
-
 
 }

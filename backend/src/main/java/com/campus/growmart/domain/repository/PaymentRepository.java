@@ -12,7 +12,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Object> {
     // Devuelve un listado con el código de cliente de aquellos clientes que
     // realizaron algun pago en 2008. Tenga en cuenta que debera eliminar aquellos
     // codigos de cliente que aparezcan repetidos.
-
     @Query("SELECT DISTINCT p.client.clientCode FROM Payment p WHERE YEAR(p.paymentDate) = ?1")
     List<Object> findClientCodesPaymentYear(String year);
 
@@ -27,7 +26,7 @@ public interface PaymentRepository extends JpaRepository<Payment, Object> {
     List<Object> findDistinctByPaymentMethod();
 
     // ¿Cuál fue el pago medio en 2009?
-    @Query("SELECT AVG(p.total), p.paymentDate FROM Payment p WHERE YEAR(p.paymentDate) = ?1 group by p.paymentDate")
+    @Query("SELECT AVG(p.total), YEAR(p.paymentDate) FROM Payment p WHERE YEAR(p.paymentDate) = ?1")
     List<Object[]> findAveragePayment(String year);
 
     // Muestre la suma total de todos los pagos que se realizaron para cada uno de

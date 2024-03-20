@@ -30,7 +30,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Object
     // sumando el coste del producto por el número de unidades vendidas de la tabla
     // detalle_pedido. El IVA es el 21 % de la base imponible, y el total la suma de
     // los dos campos anteriores.
-
     @Query("SELECT SUM(od.amount * od.product.salePrice) , SUM(od.amount * od.product.salePrice) * 0.21 , SUM(od.amount *od.product.salePrice) + (SUM(od.amount * od.product.salePrice) * 0.21)  FROM OrderDetail od ")
     List<Object[]> findCompanyBilling();
 
@@ -47,7 +46,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Object
     // Lista las ventas totales de los productos que hayan facturado más de 3000
     // euros. Se mostrará el nombre, unidades vendidas, total facturado y total
     // facturado con impuestos (21% IVA).
-
     @Query("SELECT od.product.name , SUM(od.amount) , SUM(od.amount * od.priceByUnit) , SUM(od.amount * od.priceByUnit) * 1.21 FROM OrderDetail od  GROUP BY od.product.name HAVING SUM(od.amount * od.priceByUnit) > ?1")
     List<Object[]> findProductsBillingMoreThan(String moreThan);
 

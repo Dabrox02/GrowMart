@@ -53,7 +53,7 @@ public class ClientController {
 
     @GetMapping("/countClientsAmount")
     public ResponseEntity<?> count() {
-        Map<String, Object> results = clientService.count();
+        List<Map<String, Object>> results = clientService.count();
         if (results.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
@@ -61,7 +61,7 @@ public class ClientController {
 
     @GetMapping("/countClientsAmountCity")
     public ResponseEntity<?> countByCity(@RequestParam String city) {
-        Map<String, Object> results = clientService.countByCity(city);
+        List<Map<String, Object>> results = clientService.countByCity(city);
         if (results.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
@@ -78,7 +78,7 @@ public class ClientController {
 
     @GetMapping("/countClientsWithoutEmployee")
     public ResponseEntity<?> clientAmountWithoutEmployee() {
-        Map<String, Object> results = clientService.clientAmountWithoutEmployee();
+        List<Map<String, Object>> results = clientService.clientAmountWithoutEmployee();
         if (results.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);

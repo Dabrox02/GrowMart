@@ -103,21 +103,24 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Map<String, Object> count() {
+    public List<Map<String, Object>> count() {
         long results = clientRepository.count();
+        List<Map<String, Object>> dataList = new ArrayList<>();
         Map<String, Object> clientsAmount = new HashMap<>();
         clientsAmount.put("clients_amount", results);
-
-        return clientsAmount;
+        dataList.add(clientsAmount);
+        return dataList;
     }
 
     @Override
-    public Map<String, Object> countByCity(String city) {
+    public List<Map<String, Object>> countByCity(String city) {
         long results = clientRepository.countByCityIgnoreCase(city);
+        List<Map<String, Object>> dataList = new ArrayList<>();
         Map<String, Object> clientsAmountPerCity = new HashMap<>();
         clientsAmountPerCity.put("city", city);
         clientsAmountPerCity.put("client_amount", results);
-        return clientsAmountPerCity;
+        dataList.add(clientsAmountPerCity);
+        return dataList;
     }
 
     @Override
@@ -136,13 +139,15 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Map<String, Object> clientAmountWithoutEmployee() {
-        List<Object> results = clientRepository.clientAmountWithoutEmployee();
+    public List<Map<String, Object>> clientAmountWithoutEmployee() {
+        List<Object[]> results = clientRepository.clientAmountWithoutEmployee();
+        List<Map<String, Object>> dataList = new ArrayList<>();
         Map<String, Object> clientsWithoutEmployess = new HashMap<>();
         results.stream().forEach(obj -> {
-            clientsWithoutEmployess.put("amount_clients_without_employee", obj);
+            clientsWithoutEmployess.put("amount_clients_without_employee", obj[0]);
         });
-        return clientsWithoutEmployess;
+        dataList.add(clientsWithoutEmployess);
+        return dataList;
     }
 
     @Override

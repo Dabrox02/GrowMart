@@ -36,7 +36,7 @@ public class ProductController {
 
     @GetMapping("/findPriceHighestLowest")
     public ResponseEntity<?> findMostExpesiveAndChespest() {
-        Map<String, Object> results = productService.findMostExpesiveAndChespest();
+        List<Map<String, Object>> results = productService.findMostExpesiveAndChespest();
         if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

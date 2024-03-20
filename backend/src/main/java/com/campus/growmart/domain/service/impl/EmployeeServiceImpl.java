@@ -81,11 +81,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public  Map<String, Object> count() {
+    public List<Map<String, Object>> count() {
         long results = employeeRepository.count();
+        List<Map<String, Object>> dataList = new ArrayList<>();
         Map<String, Object> clientCount = new HashMap<>();
         clientCount.put("employee_amount", results);
-        return clientCount;
+        dataList.add(clientCount);
+        return dataList;
     }
 
     @Override
@@ -93,12 +95,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Object[]> results = employeeRepository.findEmployeeAmountClients();
         List<Map<String, Object>> dataList = new ArrayList<>();
 
-        results.stream().forEach( obj->{
+        results.stream().forEach(obj -> {
             Map<String, Object> employeeAmountCLients = new HashMap<>();
             employeeAmountCLients.put("employee_name", obj[0]);
             employeeAmountCLients.put("client_amount", obj[1]);
             dataList.add(employeeAmountCLients);
-        }  );
+        });
 
         return dataList;
     }

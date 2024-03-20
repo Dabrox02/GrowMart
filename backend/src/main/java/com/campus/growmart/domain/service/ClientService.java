@@ -14,13 +14,13 @@ public interface ClientService {
 
     List<Map<String, Object>> countByCountry();
 
-    Map<String, Object> count();
+    List<Map<String, Object>> count();
 
-    Map<String, Object> countByCity(String city);
+    List<Map<String, Object>> countByCity(String city);
 
     List<Map<String, Object>> countClientsCityBeginWith(String initialLetterCity);
 
-    Map<String, Object> clientAmountWithoutEmployee();
+    List<Map<String, Object>> clientAmountWithoutEmployee();
 
     List<Map<String, Object>> clientFirstLastPayment();
 

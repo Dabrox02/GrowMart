@@ -50,8 +50,8 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     List<Object[]> countClientsCityBeginWith(@Param("initialLetterCity") String initialLetterCity);
 
     // Calcula el número de clientes que no tiene asignado representante de ventas.
-    @Query("SELECT COUNT(*)  FROM Client c WHERE c.salesRepresentativeEmployeeCode IS NULL")
-    List<Object> clientAmountWithoutEmployee();
+    @Query("SELECT COUNT(*) FROM Client c WHERE c.salesRepresentativeEmployeeCode IS NULL")
+    List<Object[]> clientAmountWithoutEmployee();
 
     // Calcula la fecha del primer y último pago realizado por cada uno de los
     // clientes. El listado deberá mostrar el nombre y los apellidos de cada
@@ -59,11 +59,15 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     @Query("SELECT c.clientName, c.contactName, c.contactSurname, MIN(pg.paymentDate) , MAX(pg.paymentDate)  FROM Client c LEFT JOIN c.paymentList pg  GROUP BY c.clientName, c.contactName, c.contactSurname")
     List<Object[]> clientFirstLastPayment();
 
-    // Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+    // Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus
+    // representantes junto con la ciudad de la oficina a la que pertenece el
+    // representante.
     @Query(value = "SELECT DISTINCT c.nombre_cliente, e.nombre, e.apellido1, ofi.ciudad FROM cliente c JOIN pago p ON c.codigo_cliente = p.codigo_cliente JOIN empleado e ON c.codigo_empleado_rep_ventas = e.codigo_empleado JOIN oficina ofi ON e.codigo_oficina = ofi.codigo_oficina", nativeQuery = true)
     List<Object[]> findClientsOfficeWithPayment();
 
-    // Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+    // Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de
+    // sus representantes junto con la ciudad de la oficina a la que pertenece el
+    // representante.
     @Query(value = "SELECT c.nombre_cliente, e.nombre, e.apellido1, ofi.ciudad FROM cliente c JOIN empleado e ON c.codigo_empleado_rep_ventas = e.codigo_empleado JOIN oficina ofi ON e.codigo_oficina = ofi.codigo_oficina LEFT JOIN pago p ON c.codigo_cliente = p.codigo_cliente WHERE p.codigo_cliente IS NULL", nativeQuery = true)
     List<Object[]> findClientsOfficeWithNoPayment();
 

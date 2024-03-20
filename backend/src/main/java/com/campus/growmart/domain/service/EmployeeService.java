@@ -13,7 +13,7 @@ public interface EmployeeService {
 
     List<EmployeeDTO> findNameLastnamePositionNotLike(String position);
 
-    Map<String, Object> count();
+    List<Map<String, Object>> count();
 
     List<Map<String, Object>> findEmployeeAmountClients();
 

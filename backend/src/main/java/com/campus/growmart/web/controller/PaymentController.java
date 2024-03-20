@@ -56,7 +56,7 @@ public class PaymentController {
     @GetMapping("/averagePaymentYear")
     public ResponseEntity<?> findAveragePayment(@RequestParam String year) {
 
-        Map<String, Object> results = paymentService.findAveragePayment(year);
+        List<Map<String, Object>> results = paymentService.findAveragePayment(year);
         if (results.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

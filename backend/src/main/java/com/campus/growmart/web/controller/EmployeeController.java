@@ -57,21 +57,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/countEmployeesAmount")
-    public ResponseEntity<?>  count() {
-        Map<String, Object> results = employeeService.count();
+    public ResponseEntity<?> count() {
+        List<Map<String, Object>> results = employeeService.count();
         if (results.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
     }
 
     @GetMapping("/employeeAmountClients")
-    public ResponseEntity<?> findEmployeeAmountClients(){
+    public ResponseEntity<?> findEmployeeAmountClients() {
         List<Map<String, Object>> results = employeeService.findEmployeeAmountClients();
         if (results.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(results);
     }
-
 
     @GetMapping("/clients")
     public ResponseEntity<?> findNameClientWithSalesRep() {
