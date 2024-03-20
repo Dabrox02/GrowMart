@@ -85,7 +85,7 @@ export const getRequest = async ({ path, config, needParams, params }, host, mai
             return await response.json();
         } else {
             let { message } = await response.json();
-            return { status: response.status, message }
+            return { status: response.status, error: message }
         }
     } catch (error) {
         return { status: 404, error };
