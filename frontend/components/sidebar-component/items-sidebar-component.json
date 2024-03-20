@@ -5,7 +5,7 @@
                 "icon": "<i class='nav-icon fas fa-cart-shopping'></i>",
                 "text": "Products",
                 "href": "",
-                "query": 5
+                "query": 4
             }
         },
         {
@@ -13,7 +13,7 @@
                 "icon": "<i class='nav-icon fas fa-users'></i>",
                 "text": "Clients",
                 "href": "",
-                "query": 5
+                "query": 19
             }
         },
         {
@@ -21,7 +21,7 @@
                 "icon": "<i class='nav-icon fas fa-person'></i>",
                 "text": "Employees",
                 "href": "",
-                "query": 5
+                "query": 13
             }
         },
         {
@@ -29,7 +29,7 @@
                 "icon": "<i class='nav-icon fas fa-house'></i>",
                 "text": "Offices",
                 "href": "",
-                "query": 5
+                "query": 4
             }
         },
         {
@@ -37,7 +37,15 @@
                 "icon": "<i class='nav-icon fas fa-file'></i>",
                 "text": "Orders",
                 "href": "",
-                "query": 5
+                "query": 6
+            }
+        },
+        {
+            "nav-link": {
+                "icon": "<i class='nav-icon fas fa-circle-info'></i>",
+                "text": "Details",
+                "href": "",
+                "query": 7
             }
         },
         {

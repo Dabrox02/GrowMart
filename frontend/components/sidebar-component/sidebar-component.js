@@ -24,16 +24,20 @@ const navItems = async (jsonFilePath) => {
       }
 
       return /*html*/`
-          <li class="nav-item">
-              <a href class="nav-link text-white">
-                ${icon}
-                <p>${text}</p>
-              </a>
-              <ul class="nav nav-treeview">
-                ${listItemsHTML}
-              </ul>
-            </li>
-      `;
+      <div class="accordion-item bg-transparent my-2">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-transparent text-white fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${text.toLowerCase()}" aria-expanded="false" aria-controls="flush-collapseOne">
+              <p class="ms-3 w-25">${icon}</p>
+              <p class="brand-text ms-3 w-100">${text}</p>
+          </button>
+        </h2>
+        <div id="flush-collapse${text.toLowerCase()}" class="accordion-collapse collapse m-0" data-bs-parent="#accordionFlush">
+          <div class="accordion-body">
+          ${listItemsHTML}
+          </div>
+        </div>
+      </div>
+  `;
     });
     return navItemsHTML.join('');
   } catch (error) {
@@ -77,11 +81,11 @@ export class SidebarComponent extends HTMLElement {
             <div class="sidebar">
               <!-- Sidebar user panel -->
               <div class="user-panel ps-2 py-3 d-flex align-items-center">
-                  <div class="image">
+                  <div class="image w-25">
                       <i class="nav-icon fas fa-user"></i>
                   </div>
                   <div class="info">
-                      <a class="d-block fw-semibold">${this.username}</a>
+                      <a class="d-block fw-semibold w-100">${this.username}</a>
                   </div>
               </div>
               <!-- Sidebar Menu -->
