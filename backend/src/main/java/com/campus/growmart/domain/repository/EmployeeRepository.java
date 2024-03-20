@@ -47,7 +47,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query(value = "SELECT e.codigo_empleado, e.nombre, e.apellido1, e.apellido2, e.puesto, e.email, e.extension FROM empleado e LEFT JOIN oficina ofi ON e.codigo_oficina = ofi.codigo_oficina WHERE e.codigo_oficina IS NULL", nativeQuery = true)
     List<Object[]> findEmployeeAllNoOffice();
 
-    // Devuelve un listado que muestre solamente los empleados que no tienen un
+    // Devuelve un listado que muestre solamente los empleados que no tienen un 
     // cliente asociado.
     @Query(value = "SELECT e.codigo_empleado, e.nombre, e.apellido1, e.apellido2, e.puesto, e.email, e.extension FROM empleado e LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas WHERE c.codigo_empleado_rep_ventas IS NULL", nativeQuery = true)
     List<Object[]> findEmployeeAllNoClient();
@@ -68,7 +68,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Object[]> findEmployeeAllNoOfficeNoClient();
 
     // Devuelve un listado con los datos de los empleados que no tienen clientes
-    // asociados y el nombre de su jefe asociado.
+    // asociados y el nombre de su jefe asociado. 
     @Query(value = "SELECT e.employeeCode, e.name, e.surname1, e.surname2, e.email, e.extension, e.position, b.name  FROM Employee e LEFT JOIN e.boss b LEFT JOIN e.clientList c WHERE c IS NULL")
     List<Object[]> findEmployeeAllNoClientWithBoss();
 

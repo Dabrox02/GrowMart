@@ -12,7 +12,7 @@ export const queries = {
     products: {
         mainRoute: "/product",
         query1: {
-            description: "Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.",
+            description: "Returns a list of all products that belong to the Ornamental range and have more than 100 units in stock. The list should be sorted by their selling price, with the highest-priced ones listed first.",
             path: `/productsRangeStock`,
             config: {
                 method: "GET"
@@ -24,34 +24,31 @@ export const queries = {
             }
         },
         query2: {
-            description: "Devuelve un listado de los productos que nunca han aparecido en un pedido.",
+            description: "Returns a list of products that have never appeared in an order.",
             path: `/noOrder`,
             config: {
                 method: "GET"
             },
             needParams: false,
-            params: {
-            }
+            params: {}
         },
         query3: {
-            description: "Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto.",
+            description: "Returns a list of products that have never appeared in an order. The result should display the name, description, and image of the product.",
             path: `/noOrder/all`,
             config: {
                 method: "GET"
             },
             needParams: false,
-            params: {
-            }
+            params: {}
         },
         query4: {
-            description: "Calcula el precio de venta del producto más caro y más barato en una misma consulta.",
+            description: "Calculates the selling price of the most expensive and cheapest products in a single query.",
             path: `/findPriceHighestLowest`,
             config: {
                 method: "GET"
             },
             needParams: false,
-            params: {
-            }
+            params: {}
         }
     },
     clients: {
@@ -250,6 +247,106 @@ export const queries = {
                 city: "madrid",
                 employeeCode: "11",
                 employeeCode2: "30"
+            }
+        }
+    },
+    employees: {
+        mainRoute: "/employee",
+        query1: {
+            description: "Returns a list with the names of the employees along with the names of their bosses.",
+            path: `/with/boss`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query2: {
+            description: "Returns a list that displays the name of each employee, the name of their immediate boss, and the name of their boss's boss.",
+            path: `/with/boss/boss`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query3: {
+            description: "Returns a list with the name, last name, and position of those employees who are not sales representatives.",
+            path: `/noPosition`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                position: "representante ventas"
+            }
+        },
+        query4: {
+            description: "Returns a list that displays only the employees who do not have an associated office.",
+            path: `/noOffice/all`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query5: {
+            description:
+                "Returns a list with the data of the employees who do not have associated clients and the name of their associated boss.",
+            path: `/noClient/with/boss/all`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query6: {
+            description:
+                "Returns a list showing only the employees who do not have an associated client, along with the data of the office where they work.",
+            path: `/noClient/office/all`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query7: {
+            description:
+                "Returns a list showing the employees who do not have an associated office and those who do not have an associated client.",
+            path: `/noClient/noOffice/all`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query8: {
+            description:
+                "Returns a list showing only the employees who do not have an associated client.",
+            path: `/noClient/all`,
+            config: {
+                method: "GET"
+            },
+            needParams: false,
+            params: {
+            }
+        },
+        query9: {
+            description:
+                "Returns a list with the name, last name, and email of the employees whose boss has a boss code equal to 7.",
+            path: `/name/surnames`,
+            config: {
+                method: "GET"
+            },
+            needParams: true,
+            params: {
+                codePass: "7"
             }
         }
     }

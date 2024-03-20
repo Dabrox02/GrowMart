@@ -75,14 +75,17 @@ export const getRequest = async ({ path, config, needParams, params }, host, mai
         let queryParams;
         config.headers = { 'Authorization': token };
         path = `${host}${mainRoute}${path}`;
-        console.log(path);
         if (needParams) {
             config.headers = { ...config.headers, "Content-Type": "application/x-www-form-urlencoded" }
             queryParams = new URLSearchParams({ ...params }).toString();
             path = `${path}${queryParams ? `?${queryParams}` : ""}`;
         }
         const response = await fetch(path, config);
-        return await response.json();
+        if (response.status === "200") {
+            return await response.json();
+        } else {
+            return { status: response.status, message: "No content" }
+        }
     } catch (error) {
         return { error };
     }
