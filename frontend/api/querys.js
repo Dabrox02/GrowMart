@@ -66,6 +66,20 @@ const showQuery = ({ query, response }) => {
     loadTable(response);
 }
 
+const showNone = ({ query, response }) => {
+    $("#content-query").innerHTML = "";
+    $("#content-query").insertAdjacentHTML("beforeend", /*html */`
+        <h2 class="text-justify">${query}</h2>
+        <table id="table-data" class="table table-striped responsive">
+            <tr>
+                <td>No data found</td>
+                <img src="https://www.prestashop.com/sites/default/files/wysiwyg/404_not_found.png">
+            </tr>
+        </table>
+    `);
+    loadTable(response);
+}
+
 export const loadQuery = async (e) => {
 
     if (e.target.closest("#query")) {
@@ -80,6 +94,8 @@ export const loadQuery = async (e) => {
                 let res = await getRequest(data, host, mainRoute, token);
                 if (res && !res.error) {
                     showQuery({ query: data.description, response: res });
+                } else {
+                    showNone({ query: data.description })
                 }
             }
         }
