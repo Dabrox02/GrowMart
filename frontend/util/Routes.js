@@ -54,7 +54,7 @@ export const queries = {
     clients: {
         mainRoute: "/client",
         query1: {
-            description: "Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.",
+            description: "Returns the name of clients and the name of their representatives along with the city of the representative's office.",
             path: `/salesRep/office`,
             config: {
                 method: "GET"
@@ -64,7 +64,7 @@ export const queries = {
             }
         },
         query2: {
-            description: "Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.",
+            description: "Returns a list of different product ranges purchased by each client.",
             path: `/productRange/purchased`,
             config: {
                 method: "GET"
@@ -74,7 +74,7 @@ export const queries = {
             }
         },
         query3: {
-            description: "Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.",
+            description: "Displays the name of clients who have made payments along with the name of their sales representatives.",
             path: `/paid`,
             config: {
                 method: "GET"
@@ -84,7 +84,7 @@ export const queries = {
             }
         },
         query4: {
-            description: "Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.",
+            description: "Returns the name of clients who have not been delivered orders on time.",
             path: `/order/notInTime`,
             config: {
                 method: "GET"
@@ -94,7 +94,7 @@ export const queries = {
             }
         },
         query5: {
-            description: "Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.",
+            description: "Returns a list showing clients who have not made any payments and those who have not placed any orders.",
             path: `/order/noPaid/all`,
             config: {
                 method: "GET"
@@ -104,7 +104,7 @@ export const queries = {
             }
         },
         query6: {
-            description: "Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.",
+            description: "Returns the name of clients who have made payments and the name of their representatives along with the city of the representative's office.",
             path: `/office/paid`,
             config: {
                 method: "GET"
@@ -114,7 +114,7 @@ export const queries = {
             }
         },
         query7: {
-            description: "Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.",
+            description: "Returns the name of clients who have not made payments and the name of their representatives along with the city of the representative's office.",
             path: `/office/noPaid`,
             config: {
                 method: "GET"
@@ -124,7 +124,7 @@ export const queries = {
             }
         },
         query8: {
-            description: "Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas.",
+            description: "Displays the name of clients who have not made payments along with the name of their sales representatives.",
             path: `/noPaid`,
             config: {
                 method: "GET"
@@ -134,7 +134,7 @@ export const queries = {
             }
         },
         query9: {
-            description: "Devuelve un listado que muestre solamente los clientes que no han pagado.",
+            description: "Returns a list showing only clients who have not paid.",
             path: `/noPaid/all`,
             config: {
                 method: "GET"
@@ -144,7 +144,7 @@ export const queries = {
             }
         },
         query10: {
-            description: "Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.",
+            description: "Returns a list showing clients who have not made any payments and those who have not placed any orders.",
             path: `/noOrder/noPaid/all`,
             config: {
                 method: "GET"
@@ -154,7 +154,7 @@ export const queries = {
             }
         },
         query11: {
-            description: "Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.",
+            description: "Returns a list showing only clients who have not placed any orders.",
             path: `/noOrder/all`,
             config: {
                 method: "GET"
@@ -164,7 +164,7 @@ export const queries = {
             }
         },
         query12: {
-            description: "Calcula el número de clientes que no tiene asignado representante de ventas.",
+            description: "Calculates the number of clients who do not have assigned sales representatives.",
             path: `/countClientsWithoutEmployee`,
             config: {
                 method: "GET"
@@ -174,7 +174,7 @@ export const queries = {
             }
         },
         query13: {
-            description: "¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por 'M'?",
+            description: "Calculates how many clients each of the cities starting with 'M' has.",
             path: `/countClientsCityBeginWith`,
             config: {
                 method: "GET"
@@ -185,7 +185,7 @@ export const queries = {
             }
         },
         query14: {
-            description: "Calcula el número de clientes que tiene la empresa.",
+            description: "Calculates the number of clients the company has.",
             path: `/countClientsAmount`,
             config: {
                 method: "GET"
@@ -195,7 +195,7 @@ export const queries = {
             }
         },
         query15: {
-            description: "¿Cuántos clientes existen con domicilio en la ciudad de Madrid?",
+            description: "How many clients exist with addresses in the city of Madrid?",
             path: `/countClientsAmountCity`,
             config: {
                 method: "GET"
@@ -206,7 +206,7 @@ export const queries = {
             }
         },
         query16: {
-            description: "¿Cuántos clientes tiene cada país?",
+            description: "How many clients does each country have?",
             path: `/countByCountry`,
             config: {
                 method: "GET"
@@ -216,7 +216,7 @@ export const queries = {
             }
         },
         query17: {
-            description: "Calcula la fecha del primer y último pago realizado por cada uno de los clientes. El listado deberá mostrar el nombre y los apellidos de cada cliente.",
+            description: "Calculates the date of the first and last payments made by each client. The list should show the first and last name of each client.",
             path: `/clientFirstLastPayment`,
             config: {
                 method: "GET"
@@ -226,7 +226,7 @@ export const queries = {
             }
         },
         query18: {
-            description: "Devuelve un listado con el nombre de los todos los clientes españoles.",
+            description: "Returns a list with the names of all Spanish clients.",
             path: `/clientCountry`,
             config: {
                 method: "GET"
@@ -237,7 +237,7 @@ export const queries = {
             }
         },
         query19: {
-            description: "Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30.",
+            description: "Returns a list with all clients who are from the city of Madrid and whose sales representative has the employee code 11 or 30.",
             path: `/clientCityEmployee`,
             config: {
                 method: "GET"
